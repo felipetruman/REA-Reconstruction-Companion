@@ -27,6 +27,9 @@ test('formal checkpoint records are connected to real workflow state',async t=>{
   const store=new EvidenceStore(path.join(root,'run/evidence'));const checkpoints=store.records().filter(r=>r.type==='Checkpoint');assert.equal(checkpoints.at(-1).workflowState,'COMPLETE');assert.deepEqual(store.audit(),[]);
   const validation=store.records().findLast(r=>r.type==='Validation');assert.ok(validation.implementationIds.length);assert.ok(store.report().edges.some(e=>e.to===validation.id&&e.relation==='implementationIds'));
   assert.equal(workflow.report().metrics.evidenceCoverage.value,1);
+  const uncovered=createWorkflow({...config,requirements:[...config.requirements,{id:'uncovered',priority:'critical',acceptance:['No preserved scenario supports this requirement']}]},{root:path.join(root,'uncovered'),allowedExecutables:[process.execPath]});
+  assert.equal((await uncovered.runtime.run({execute:true})).state,'BLOCKED');
+  assert.equal(uncovered.report().metrics.evidenceCoverage.numerator,1);assert.equal(uncovered.report().metrics.evidenceCoverage.denominator,2);
 });
 test('target version changes invalidate execution instead of reusing cached proof',async t=>{
   const root=temp(t);createExample(root,{execute:true});const config=readWorkflow(path.join(root,'workflow.json'));

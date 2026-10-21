@@ -74,7 +74,7 @@
     "tests/v2/hardening.test.mjs": "5687a0dff88aa4041b42696771a637713658a594f7ee9d55d8f06edd10ac0b54",
     "tests/v2/integration.test.mjs": "02b5059184972f051097a3d5938596c77daf9d696d773455941f899410314306",
     "tests/v2/optimization.test.mjs": "ef39e49b2a16e6bebc9686fa5e752fc62546fdf1ef5cf905372ae5f284c80c4d",
-    "tests/v2/resources.test.mjs": "efec360f31df9718b766662b71ee9007a1bdf34cb8f737fe80dd07af502d9e59",
+    "tests/v2/resources.test.mjs": "3d8c15284ef4f5a85b6dc35b62db464d58ebb40dd7e91cbc03d1db03cd43be0f",
     "tests/v2/runtime.test.mjs": "f3c5d43d1d7f4808684314b414d99765e2769afbf4c8d688a9c13e626e714a46",
     "tests/v2/validation.test.mjs": "f2ef7c3ba0648b823348817410a994719b695f520eed1a3f60b2d27faf5a88c0",
     "tests/version-change.test.mjs": "9a40c3ccc9bee937a3ffe7917db63455e868780611b180e9c5cb9715ba081796",
@@ -287,7 +287,7 @@
     "assets/discord-banner.png": "4f25d6a75a9b0203ca9ebc217f815e46fb1783a244d81b763b5681173c24a1f6",
     "assets/kofi-support.png": "31d0947770098a2efbf31033331d4284df3f127d71608f2e3f45e53f2abeb736",
     "src/adapters/local.mjs": "2cebda341d2921caadc36f98cce005102ce116b194de1e0725caa932b821083e",
-    "src/adapters/workflow.mjs": "bf70f52ded2f056e5f184d9a1ad9640e53a1f7263df721c86567c788198b018c",
+    "src/adapters/workflow.mjs": "cea30bb7656607f3fad850dff211113752ca2752f80e346011f2af197d322f75",
     "src/cli/example.mjs": "8d8969358ff90c317e361a9cf95e0db206158576eabadb05e282eb2d1eb7d0f4",
     "src/cli/index.mjs": "884fdbf9cd3ed148a9b5e5ce8ab58ee80e19db9fa0710e7568325028e16b9b77",
     "src/evidence/index.mjs": "8a10de01ec35ebd357be6f80caca22e4db294d419fb6c10279d50222f1d1acb7",
@@ -305,7 +305,7 @@
     "docs/TRACEABILITY.md": "acb858de5b9ef01ef726333611c6f246872b16291363c11f9cc080eeec073bf2",
     "docs/USAGE.md": "439d4b981bd00124e044bc83eeb5a5f81f56668d007627f6fb096cc054c87d36",
     "docs/VALIDATION.md": "98e66cab7eeb0bf655591e66e119fa332221ddb4ddc6ddd8823fc6bcd3d6b6ab",
-    "docs/validation-results.json": "70f878fa62e91745e64ad5cb6c75e1882baceeb146a3a7dca1cde7f1f0ca7890",
+    "docs/validation-results.json": "8e34e9e8d9aac4b02db78f8055dc72dee0dac3cf084ed5c8c6f9471a83a0b84c",
     "zit.toml": "da724eb05effa1fb5d08e2e0d8d986eecd3d6053f1b65135cfca1dfc91fd7333"
   }
 }

@@ -46,6 +46,7 @@ export function createWorkflow(config,{root,allowedExecutables=[]}={}) {
   }
   const targetRecord={type:'Target',schemaVersion:VERSION,id:config.target.id,name:config.target.name??config.target.id,version:config.target.version,hash:config.target.hash,platform:process.platform,environment:{node:process.version},scope:config.scope,origin:config.target.origin??'local:authorized-workflow'};
   const cases=clone(config.oracle.cases);
+  const supportedRequirements=new Set(cases.filter(c=>Object.hasOwn(c,'expected')).map(c=>c.requirementId));
   const evidenceId=`ev-${digest({target:config.target,oracle:config.oracle}).slice(0,32)}`;
   const cacheId={target:config.target.id,version:config.target.version,hash:config.target.hash,environment:{node:process.version,platform:process.platform},scenario:'preserved-reference',tool:{name:'recording',version:VERSION,parameters:{corpus:digest(cases)}},schemaVersion:VERSION};
   const execute=async (command,{signal,input}={})=>{
@@ -110,7 +111,7 @@ export function createWorkflow(config,{root,allowedExecutables=[]}={}) {
     const report=runtime.report(),candidate=fs.existsSync(candidateDir)?treeIdentity(candidateDir):null;
     const evidenceStore=fs.existsSync(path.join(root,'evidence/store.json'))?new EvidenceStore(path.join(root,'evidence')):null;
     const evidence=evidenceStore?.report({candidate})??null;
-    const requirements=(evidenceStore?.records()??[]).filter(r=>r.type==='Requirement').map(r=>({...r,evidenceSupported:!evidence.unsupported.includes(r.id)&&r.evidenceIds.every(id=>!evidence.stale.includes(id))&&!r.findingIds.some(id=>evidence.contradictions.includes(id)),validated:!evidence.unvalidated.includes(r.id)}));
+    const requirements=(evidenceStore?.records()??[]).filter(r=>r.type==='Requirement').map(r=>({...r,evidenceSupported:supportedRequirements.has(r.id)&&!evidence.unsupported.includes(r.id)&&r.evidenceIds.every(id=>!evidence.stale.includes(id))&&!r.findingIds.some(id=>evidence.contradictions.includes(id)),validated:!evidence.unvalidated.includes(r.id)}));
     const measured=metrics({results:runtime.status().validations.at(-1)?.results??[],requirements,interventions:runtime.status().necessaryInterventions,execution:report.metrics.executionEfficiency});
     return {...report,metrics:measured,evidence,completionCurrent:runtime.status().state==='COMPLETE'&&!!candidate&&runtime.status().validations.at(-1)?.candidate.hash===candidate.hash,context:summarize(runtime.status()),telemetry:telemetry.snapshot()};
   }};

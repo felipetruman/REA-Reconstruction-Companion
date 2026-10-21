@@ -96,5 +96,23 @@
   "completionProof": {
     "mechanism": "fresh in-process verifier receipt; tampered observations and hand-authored PASS rejected",
     "historicalCheckpoints": "not new execution evidence"
+  },
+  "supplementalCoverageRegression": {
+    "criterion": "Current noncontradictory evidence AND a preserved expected scenario explicitly mapped to the requirement",
+    "expectedNumerator": 1,
+    "expectedDenominator": 2,
+    "node24": {
+      "tests": 5,
+      "pass": 5,
+      "fail": 0,
+      "log": "/tmp/companion-coverage-green.log"
+    },
+    "node22": {
+      "tests": 5,
+      "pass": 5,
+      "fail": 0,
+      "log": "/tmp/companion-coverage-node22.log",
+      "logSha256": "b2eb6cc9076cbd3d972e1deebc77360c3f36bd9a51d7888345b94c5066075e36"
+    }
   }
 }
