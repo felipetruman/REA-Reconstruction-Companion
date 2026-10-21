@@ -12,7 +12,8 @@
     "./runtime": "./src/runtime/index.mjs",
     "./integration": "./src/integration/index.mjs",
     "./optimization": "./src/optimization/index.mjs",
-    "./adapters/local": "./src/adapters/local.mjs"
+    "./adapters/local": "./src/adapters/local.mjs",
+    "./*": "./*"
   },
   "scripts": {
     "test": "node scripts/run-checks.mjs",

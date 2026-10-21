@@ -2,6 +2,10 @@ import { performance } from 'node:perf_hooks';
 import { canonical, clone, digest, atomicWrite } from '../evidence/index.mjs';
 
 export const STATUSES=Object.freeze(['PASS','FAIL','INCONCLUSIVE','NOT_RUN']);
+const issuedReports=new WeakMap();
+const verifiedPayload=report=>({status:report.status,independent:report.independent,oracle:report.oracle,target:report.target,candidateIdentity:report.candidate?.identity,corpus:report.corpus,results:report.results});
+function issueReport(report){issuedReports.set(report,digest(verifiedPayload(report)));return report;}
+export function isVerifiedReport(report){try{return issuedReports.has(report)&&issuedReports.get(report)===digest(verifiedPayload(report));}catch{return false;}}
 export function recordingOracle({id,identity,cases,limitations=[]}) {
   const recordings=clone(cases);
   return {id,identity,kind:'recording',independent:true,limitations,
@@ -58,7 +62,7 @@ export async function differential({oracle,candidate,candidateIdentity,target={}
     base.results.push({id:row.id,...(row.requirementId?{requirementId:row.requirementId}:{}),critical:row.critical!==false,...result,expected:expected??null,observed});
   }
   const status=base.results.some(r=>r.status==='FAIL')?'FAIL':base.results.every(r=>r.status==='PASS')?'PASS':'INCONCLUSIVE';
-  return {...base,status,independent:true,durationMs:performance.now()-started};
+  return issueReport({...base,status,independent:true,durationMs:performance.now()-started});
 }
 
 export async function fuzz({seed=1,iterations=100,generate,check,shrink,shrinkLimit=100,corpusFile,timeoutMs=1000,signal}) {

@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { performance } from 'node:perf_hooks';
 import { atomicWrite, canonical, clone, digest, noSymlinks, VERSION } from '../evidence/index.mjs';
-import { bounded, metrics } from '../validation/index.mjs';
+import { bounded, metrics, isVerifiedReport } from '../validation/index.mjs';
 
 export const STATES=Object.freeze(['INVESTIGATE','SPECIFY','IMPLEMENT','VALIDATE','DIAGNOSE','REPAIR','REVALIDATE','COMPLETE','BLOCKED','CANCELLED']);
 const defaults={maxIterations:50,stageMs:30000,totalMs:300000,maxOperations:100,maxAttempts:3};
@@ -43,7 +43,7 @@ export class Runtime {
     for(const key of ['operations','iterations','attempts','spentMs'])if(!Number.isFinite(document[key])||document[key]<0)throw new Error(`Invalid checkpoint ${key}`);
     if(!document.taskResults||typeof document.taskResults!=='object'||Array.isArray(document.taskResults))throw new Error('Invalid checkpoint task results');
     this.data=document;
-    if(document.state==='COMPLETE'&&!this.validationPassed(document.validations.at(-1)))throw new Error('Checkpoint completion gate invalid');
+    if(document.state==='COMPLETE'&&!this.validationPassed(document.validations.at(-1),{historical:true}))throw new Error('Checkpoint completion gate invalid');
     this.revision=digest(bytes);
   }
   status(){return clone(this.data);}
@@ -55,7 +55,9 @@ export class Runtime {
     if(next==='COMPLETE'&&!this.validationPassed(this.data.validations.at(-1)))throw new Error('Independent completion gate not satisfied');
     this.data.transitions.push({from:this.data.state,to:next,reason:scrub(reason),operation:this.data.operations,timestamp:new Date().toISOString()});this.data.state=next;this.save();
   }
-  validationPassed(result) {
+  validationPassed(result,{historical=false}={}) {
+    if(!historical&&!this.validationVerified)return false;
+    if(result?.fullSuite===false)return false;
     if(!result||result.independent!==true||!result.oracle||!result.candidate?.identity||result.oracle===result.candidate.identity||!result.results?.length||result.status!=='PASS'||result.results.some(r=>r.status!=='PASS')||this.data.pending.length)return false;
     if(canonical(result.target??{})!==canonical(this.data.target)||!result.corpus?.hash)return false;
     return this.data.requirements.length>0&&this.data.requirements.every(r=>result.results.some(v=>v.requirementId===r.id&&v.status==='PASS'));
@@ -77,6 +79,7 @@ export class Runtime {
       if(name==='specify'&&(!Array.isArray(result.requirements)||result.requirements.some(r=>!r||typeof r.id!=='string'||!Array.isArray(r.acceptance)||!r.acceptance.length||r.acceptance.some(x=>typeof x!=='string'))))throw new Error('Invalid verifiable requirement contract');
       if(name==='specify')planTasks(result.requirements.map(r=>({id:r.id,dependsOn:r.dependencies??[],scope:[]})),[]);
       if(name==='validate'&&(!['PASS','FAIL','INCONCLUSIVE','NOT_RUN'].includes(result.status)||!Array.isArray(result.results)||result.results.some(r=>!r||typeof r.id!=='string'||!['PASS','FAIL','INCONCLUSIVE','NOT_RUN'].includes(r.status))))throw new Error('Invalid independent validation report');
+      if(name==='validate')this.validationVerified=isVerifiedReport(result);
       return clone(result);
     }
     finally{const durationMs=performance.now()-start;this.data.spentMs+=durationMs;this.data.stageDurations.push({stage:name,durationMs});this.save();}

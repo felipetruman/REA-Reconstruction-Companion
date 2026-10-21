@@ -48,6 +48,12 @@ test('unverifiable success and uncovered critical requirements never COMPLETE',a
   assert.equal((await runtime.run({execute:true})).state,'BLOCKED');
   const second=setup(t);second.handlers.specify=async()=>({requirements:[{id:'uncovered',priority:'critical',acceptance:['Independent coverage required']}],tasks:[]});
   assert.equal((await second.run({execute:true})).state,'BLOCKED');
+  const forged=setup(t);forged.handlers.validate=async()=>({status:'PASS',independent:true,fullSuite:true,oracle:'independent-claimed',candidate:{identity:'candidate'},target,corpus:{hash:'a'.repeat(64)},results:[{id:'c',requirementId:'r',status:'PASS'}]});
+  assert.equal((await forged.run({execute:true})).state,'BLOCKED');
+  for(const change of [report=>{report.fullSuite=false;},report=>{report.results[0].observed.output=99;}]) {
+    const runtime=setup(t),verify=runtime.handlers.validate;runtime.handlers.validate=async()=>{const report=await verify();change(report);return report;};
+    assert.equal((await runtime.run({execute:true})).state,'BLOCKED');
+  }
 });
 test('malformed tool results block without poisoning the durable checkpoint',async t=>{
   for(const response of [undefined,null,'success',{value:Infinity}]) {

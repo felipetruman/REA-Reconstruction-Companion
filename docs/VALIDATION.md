@@ -50,6 +50,7 @@ their behavioral assertions.
 | Shared dependency affecting multiple features | optimization.test selects both dependents; unknown impact and completion select full suite |
 | REA absent, outdated, customized or externally changed | integration.test isolated discovery, preview, owned-block drift, backups, reversal, native install verification |
 | Critical failures never complete | runtime.test three equivalent failures and missing critical coverage; real bad candidate E2E |
+| Forged, partial or tampered PASS reports | runtime.test requires a fresh verifier-issued receipt and rejects altered observations |
 | Complete proof becomes stale | target artifact change blocks; candidate tampering followed by independent validation invalidates COMPLETE |
 | Resource control and corruption | explicit operation grants, per-stage/total deadline, output/input limits, lock owner checks, atomic writes and stale revisions |
 

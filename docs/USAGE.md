@@ -78,6 +78,9 @@ oracles, `differential`, seeded `fuzz`, bounded minimization, `mutations`,
 `benchmark`, `blindProtocol` and metrics. A contract oracle must be independent
 and return a boolean; throwing or absent oracles are inconclusive. The caller
 is responsible for genuine oracle provenance, not merely an independent label.
+Runtime validation handlers must return the fresh object issued by `differential`,
+not a JSON copy or a hand-authored PASS. The live gate verifies the engine receipt;
+an explicit `fullSuite: false` report cannot complete a workflow.
 Fuzz generators/checks are trusted callbacks; use `corpusFile` to preserve a
 reproducible corpus. Mutants are explicit local functions, not unknown code.
 Blind evaluation records a protocol and NOT_RUN until an authorized external

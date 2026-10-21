@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import { createRequire } from 'node:module';
 import { discover, diagnose, integrationPlan, applyIntegration, uninstallIntegration, installCompanion } from '../../src/integration/index.mjs';
 function fixture(t,version='4.1.0') {
   const root=fs.mkdtempSync(path.join(os.tmpdir(),'REA space '));t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
@@ -42,6 +43,7 @@ test('external block modification, stale plan, ambiguous case and symlink fail s
   fs.symlinkSync(file,path.join(root,'link'));assert.throws(()=>integrationPlan({reaPath:path.join(root,'link'),mode:'legacy'}),/symlink/);
 });
 test('native scoped installation verifies files, detects drift and preserves customizations until explicit replacement',t=>{
+  assert.equal(createRequire(import.meta.url).resolve('rea-reconstruction-companion/install.mjs'),new URL('../../install.mjs',import.meta.url).pathname);
   const {root,file}=fixture(t),skillsDir=path.join(root,'isolated skills'),before=fs.readFileSync(file,'utf8');
   const preview=installCompanion({skillsDir,host:'codex'});assert.equal(preview.status,'ABSENT');assert.equal(fs.existsSync(skillsDir),false);
   const installed=installCompanion({skillsDir,host:'codex',execute:true});assert.equal(installed.status,'VERIFIED');assert.equal(fs.readFileSync(file,'utf8'),before);

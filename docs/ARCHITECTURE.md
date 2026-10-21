@@ -42,6 +42,11 @@ AbortSignal. The JSON adapter supplies real subprocess operations and the native
 differential verifier. It never imports JavaScript named in target evidence.
 Core users may provide trusted REA/host adapters through these contracts without
 adding a provider SDK. Missing tools block; the runtime does not invent tools.
+The live completion gate additionally requires an in-process receipt issued by
+`differential`. Filled-in PASS/oracle metadata or a deserialized report cannot
+forge this receipt. Trusted validation adapters return the fresh verifier object;
+changes to its validated observations invalidate the receipt. Persisted reports
+are historical checkpoints, not new proof after interruption or target changes.
 
 The persistent task DAG is topologically sorted and checked against declared
 scope. Task results, evidence IDs, requirements, decisions, blockers, operation

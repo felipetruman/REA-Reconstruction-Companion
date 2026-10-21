@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-10-21T00:26:10.796101+00:00",
+  "generatedAt": "2026-10-21T00:33:29.358618+00:00",
   "sourceBaseline": "269ac04cad16bb38e688b71bc2760b44428e4367",
   "environment": {
     "node": "24.19.0",
@@ -37,9 +37,9 @@
         "todo": 0
       },
       "exit": 0,
-      "durationMs": 10274.899834,
-      "logSha256": "b2761c1bbc8d6cc69d699c2252bdb9e26d3da333a666c11c5f2ac2cd0383bd6e",
-      "localLog": "/tmp/companion-verified-suite.log"
+      "durationMs": 10825.254618,
+      "logSha256": "8a102fa76c82130cf44ed4a94ea99c8d28078f248512203f045de60e792f3d29",
+      "localLog": "/tmp/companion-attested-final-suite.log"
     }
   ],
   "newSuite": {
@@ -84,12 +84,17 @@
     "pass": 42,
     "fail": 0,
     "skipped": 0,
-    "localLog": "/tmp/companion-node22-verified.log"
+    "localLog": "/tmp/companion-attested-node22.log"
   },
   "staticChecks": {
     "command": "pnpm lint",
     "status": "PASS",
     "modules": 9,
-    "kind": "native syntax and execution policy; no TypeScript compiler"
+    "kind": "native syntax and execution policy; no TypeScript compiler",
+    "localLog": "/tmp/companion-attested-lint.log"
+  },
+  "completionProof": {
+    "mechanism": "fresh in-process verifier receipt; tampered observations and hand-authored PASS rejected",
+    "historicalCheckpoints": "not new execution evidence"
   }
 }
