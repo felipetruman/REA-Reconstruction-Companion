@@ -6,8 +6,8 @@
 |---|---|---|---|
 | Autonomous Runtime | Implemented | runtime, resources and real CLI E2E | Trusted injected tools; no automatic AI agent; callbacks must cooperate |
 | Evidence Engine | Implemented | evidence, hardening, resources | Local atomic persistence; interrupted store locks need inspection |
-| Validation Engine | Implemented | validation, benchmark, bad-candidate E2E | Genuine oracle provenance belongs to independent provider; blind agent evaluation NOT_RUN |
-| REA Integration Adapter | Implemented | isolated integration and original installer regression | Live host loading unverified; REA major compatibility bounded to 4–6 |
+| Validation Engine | Implemented | validation, benchmark, bad-candidate E2E | Genuine oracle provenance belongs to independent provider; single-target held-out evaluation FAIL 63/64; correctly BLOCKED |
+| REA Integration Adapter | Implemented | isolated integration and original installer regression | REA CLI 4.1.0 inspected an actual ELF; current Codex loaded both source skills explicitly; automatic routing unverified; REA major compatibility bounded to 4–6 |
 | Context Optimizer | Implemented | optimization, graph/candidate invalidation | Ambiguous impact uses full suite; host tokens absent unless explicitly reported |
 
 ## B. Files and purpose
@@ -60,14 +60,34 @@ cancellation, resume, independent revalidation, recovery and integration reversa
 `node src/cli/index.mjs help` is the dependency-free entry point. The example
 generator refuses existing destinations; inspection operations create no files.
 
-## F. Remaining external validation and delivery boundary
+## F. Follow-up validation and remaining boundaries
 
-Actual REA/Codex/Claude live-session activation, Node 20 minimum-version execution,
-Windows/macOS execution and blinded agent reconstruction benchmarks remain
-NOT_RUN. No model was invoked, no paid API configured, no service deployed and
-no code pushed. Native local execution does not supply OS sandbox isolation.
+Node **20.20.2** executed the full suite: 614 PASS, 0 FAIL, 3 platform skips
+before the new CLI probe test. Final follow-up results appear in
+[validation-results.json](validation-results.json).
 
-Work is recorded through Zit in an isolated workspace. Acceptance/integration
-into the principal checkout belongs to the integrator; the source and tests are
-usable directly from the recorded workspace. This report does not equate an
-unintegrated change with a published release or a globally upgraded installation.
+One authorized agent reconstructed a newly generated black-box target without
+inherited conversation. Independent held-out evaluation: **63/64, FAIL**.
+Runtime reached **BLOCKED**, preserving the SIZE divergence instead of declaring
+COMPLETE. [Protocol, frozen artifacts and replay](../evals/heldout-20261021/README.md).
+This N=1 experiment does not establish generalization; published replay is no
+longer blind. Agent development shared the host; final execution used Docker
+isolation with no network, non-root, read-only filesystem and resource limits.
+
+REA CLI **4.1.0** performed `inspect-artifact` on an actual Node 20 ELF. The
+current Codex session explicitly read both source skills. Optional
+`integration --action probe` verifies the authorized CLI process separately
+from read-only file diagnosis; skill metadata revision 26 is not CLI semver.
+Evidence: [probe](evidence/rea-live-probe.json),
+[inspection](evidence/rea-live-inspection.json). This does not prove automatic
+routing, Claude Code activation, or a global V2 upgrade; global files unchanged.
+
+Windows/macOS native execution remains **NOT_RUN**: no corresponding local OS
+or VM is available. Existing public-repository CI already covers Ubuntu,
+Windows and macOS on Node 20/22/24. Running remote jobs requires a remote push,
+which this mission explicitly forbids automatically. No paid API, deployment,
+remote push or additional unapproved agent was used.
+
+Local Git integration is performed through accepted Zit records and local
+export, preserving history. This is not a published release. Local command
+adapters still require trusted tools; they do not provide an OS sandbox.

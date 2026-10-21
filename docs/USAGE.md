@@ -83,8 +83,9 @@ not a JSON copy or a hand-authored PASS. The live gate verifies the engine recei
 an explicit `fullSuite: false` report cannot complete a workflow.
 Fuzz generators/checks are trusted callbacks; use `corpusFile` to preserve a
 reproducible corpus. Mutants are explicit local functions, not unknown code.
-Blind evaluation records a protocol and NOT_RUN until an authorized external
-custodian/runner supplies an unexposed target and held-out corpus.
+Blind evaluation requires an unexposed target and held-out corpus. The archived
+2026-10-21 single-target run and historical replay are documented in
+`evals/heldout-20261021/README.md`; replay does not become a fresh blind result.
 
 `src/optimization/index.mjs` exports exact-identity cache, conservative impact
 selection, per-topic reference selection/loading, bounded summaries and local
@@ -118,3 +119,15 @@ it does not apply it. Prefer explicit host invocation (`$rea-reconstruction-comp
 in Codex; `/rea-reconstruction-companion` in Claude Code). Legacy integration
 modifies only its marked block. Runtime verification remains false until actual
 host acknowledgement; file presence alone is insufficient.
+
+## Optional live REA CLI probe
+
+Read-only diagnosis never starts a host. To check an already installed CLI,
+explicitly authorize its absolute executable (replace both occurrences):
+
+```sh
+node src/cli/index.mjs integration --action probe --execute --rea-cli /absolute/path/rea --allow-executable /absolute/path/rea --rea-path /absolute/path/reverse-engineer-anything --companion-path skills/rea-reconstruction-companion --host codex
+```
+
+A successful CLI probe verifies version and availability. It does not prove
+model routing, load skills into another host, or modify global config.

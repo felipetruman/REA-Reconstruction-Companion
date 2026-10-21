@@ -70,23 +70,33 @@ only after the preserved independent corpus passed, and reported no broken
 graph references. Runtime operations count stages plus tool calls; telemetry
 tool counts are separately labeled, so their denominators differ deliberately.
 
+## Follow-up validation (2026-10-21)
+
+Full suite passed on Node 20.20.2 and 24.19.0: **618 tests, 615 PASS,
+0 FAIL, 3 platform skips** on each runtime. The added test covers explicit
+CLI probe authorization and skill-revision/CLI-version separation.
+Native syntax/execution policy passed for all nine ESM modules.
+
+One authorized agent used a fresh target, no inherited conversation and 159
+black-box queries. Independent held-out corpus: **63/64, FAIL**. Real runtime
+classified the implementation divergence and stopped **BLOCKED**. This proves
+that this run did not falsely complete; N=1 cannot estimate effectiveness.
+[Archived protocol and reproducible exposed replay](../evals/heldout-20261021/README.md).
+
+REA 4.1.0 performed passive inspection of an actual Node 20 ELF. Both source
+skills were explicitly read in the current Codex session. This verifies an
+explicit workflow and CLI availability, not automatic global activation.
+
 ## Limits of this evidence
 
-No live model/agent, tariffed API, REA host session, blind held-out reconstruction,
-deployment, remote push or global client change was executed. Those evaluations
-are **NOT_RUN**. Native host filesystem installation and legacy text integration
-are tested; actual live skill routing remains unverified without host evidence.
-Node 22.22.0 additionally passed the 42-test new suite; minimum
-Node 20, Windows and macOS have not been executed in this environment.
+Windows and macOS execution remain NOT_RUN: corresponding local operating
+systems/VMs unavailable. The existing nine-job public CI matrix covers those
+platforms and Node 20/22/24, but has not been triggered by a remote push here.
+Claude Code loading and automatic global V2 routing remain NOT_RUN. Global
+host files unchanged. No extra API, billing, deployment or remote push.
 
-Trusted local subprocesses are tested. Unknown software sandbox isolation and
-CPU/memory/network containment require a caller-provided sandbox adapter. There
-is no claim that an executable allowlist confines a granted interpreter.
-Cooperative AbortSignal handling is required for in-process callbacks.
-An atomic store lock left by a hard kill requires inspection; the runtime only
-automatically diagnoses/removes its own explicitly requested dead-owner run lock.
-
-Public fixtures are known to the implementer and provide no evidence of agent
-generalization. No external telemetry, daemon, new npm dependency or recurring
-process was introduced. Original Markdown/install/update behavior remains under
-the original regression suite; MIT licensing is unchanged.
+Agent development relied on protocol separation within a shared host, not a
+hostile-agent security boundary. Frozen candidate evaluation used pinned,
+offline, non-root, read-only Docker with CPU/memory/PID limits. The generic
+local command adapter itself is not an OS sandbox. No generalization or
+performance improvement is inferred from public fixtures or a single target.

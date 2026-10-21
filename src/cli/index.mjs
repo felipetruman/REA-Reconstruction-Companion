@@ -4,12 +4,12 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createWorkflow, readWorkflow } from '../adapters/workflow.mjs';
 import { planTasks } from '../runtime/index.mjs';
-import { diagnose, integrationPlan, applyIntegration, uninstallIntegration, discover, installCompanion } from '../integration/index.mjs';
+import { probeRea, diagnose, integrationPlan, applyIntegration, uninstallIntegration, discover, installCompanion } from '../integration/index.mjs';
 import { selectReferences } from '../optimization/index.mjs';
 
 export async function main(argv=process.argv.slice(2)) {
   const [operation,...args]=argv,options={allowedExecutables:[]};
-  const keys={'--config':'config','--root':'root','--until':'until','--rea-path':'reaPath','--companion-path':'companionPath','--host':'host','--mode':'mode','--receipt-dir':'receiptDir','--receipt':'receipt','--action':'action','--topic':'topic','--skills-dir':'skillsDir'};
+  const keys={'--rea-cli':'reaCli','--config':'config','--root':'root','--until':'until','--rea-path':'reaPath','--companion-path':'companionPath','--host':'host','--mode':'mode','--receipt-dir':'receiptDir','--receipt':'receipt','--action':'action','--topic':'topic','--skills-dir':'skillsDir'};
   for(let i=0;i<args.length;i++) {
     if(args[i]==='--execute'){options.execute=true;continue;}
     if(args[i]==='--replace'){options.replace=true;continue;}
@@ -25,6 +25,7 @@ export async function main(argv=process.argv.slice(2)) {
     if(action==='discover')result=discover();
     else if(action==='skill-install')result=installCompanion(options);
     else if(action==='diagnose')result=diagnose(options);
+    else if(action==='probe')result=await probeRea({...options,cwd:process.cwd(),command:{executable:options.reaCli,args:['--version']}});
     else if(action==='plan')result=integrationPlan(options);
     else if(action==='install')result=applyIntegration(integrationPlan(options),options);
     else if(action==='uninstall'){if(!options.receipt||fs.statSync(options.receipt).size>2*1024*1024)throw new Error('Bounded receipt required');result=uninstallIntegration(JSON.parse(fs.readFileSync(options.receipt)),options);}

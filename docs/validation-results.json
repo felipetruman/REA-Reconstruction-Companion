@@ -65,17 +65,20 @@
       "validDenominator": 2
     },
     "agentEvaluation": {
-      "status": "NOT_RUN",
-      "blind": false,
-      "reason": "No agent/model invoked. Public fixtures do not measure generalization."
+      "status": "FAIL",
+      "blindAtOriginalEvaluation": true,
+      "passed": 63,
+      "total": 64,
+      "targets": 1,
+      "report": "../evals/heldout-20261021/report.json",
+      "limitations": "Protocol-only development secrecy on shared host. Historical replay is exposed. No generalization estimate."
     }
   },
   "notRun": [
-    "live REA/host skill routing",
-    "blind agent benchmark",
-    "Node 20 minimum version",
-    "Windows",
-    "macOS"
+    "Windows native execution",
+    "macOS native execution",
+    "Claude Code live-session routing",
+    "automatic global V2 host routing"
   ],
   "releaseVerification": "See release verification command; generated package is local, unpublished.",
   "node22": {
@@ -113,6 +116,65 @@
       "fail": 0,
       "log": "/tmp/companion-coverage-node22.log",
       "logSha256": "b2eb6cc9076cbd3d972e1deebc77360c3f36bd9a51d7888345b94c5066075e36"
+    }
+  },
+  "node20": {
+    "version": "20.20.2",
+    "tests": 617,
+    "pass": 614,
+    "fail": 0,
+    "skipped": 3,
+    "archiveSha256": "df770b2a6f130ed8627c9782c988fda9669fa23898329a61a871e32f965e007d",
+    "logSha256": "6cd7edf4bed4ea2dc2f79cd5dd2affb7dc33e1c2f2c333a489257a0ecd08f01e",
+    "scope": "Before optional live version probe; final rerun recorded separately"
+  },
+  "blindEvaluation": {
+    "status": "FAIL",
+    "passed": 63,
+    "total": 64,
+    "runtimeState": "BLOCKED",
+    "agentCount": 1,
+    "oracleQueries": 159,
+    "report": "../evals/heldout-20261021/report.json",
+    "limitations": [
+      "N=1 target; no generalization estimate.",
+      "Agent development used shared-host protocol separation, not adversarial OS isolation.",
+      "Candidate frozen before hidden evaluation. No repair after hidden feedback.",
+      "Candidate evaluation used an offline, non-root, read-only resource-limited Docker container."
+    ]
+  },
+  "liveIntegration": {
+    "reaCli": "4.1.0",
+    "actualOperation": "inspect-artifact",
+    "host": "current Codex session, explicitly read source skills",
+    "automaticRouting": "NOT_RUN",
+    "globalInstallation": "unchanged",
+    "evidence": "evidence/rea-live-inspection.json"
+  },
+  "followUp": {
+    "node20": {
+      "node": "20.20.2",
+      "tests": 618,
+      "pass": 615,
+      "fail": 0,
+      "skipped": 3,
+      "logSha256": "5751ecc113ef5af5ebd3279d1d24509cd986e5542ef2bd0eca28c04225715ecf"
+    },
+    "node24": {
+      "node": "24.19.0",
+      "tests": 618,
+      "pass": 615,
+      "fail": 0,
+      "skipped": 3,
+      "logSha256": "dc31f0ee3eb2a2727b86830cdc5365e82d3c62bc2309126185cc84b213528104"
+    },
+    "lint": "PASS: 9 ESM modules",
+    "historicalReplay": {
+      "status": "FAIL",
+      "passed": 63,
+      "total": 64,
+      "runtimeState": "BLOCKED",
+      "logSha256": "0a927373b6ac7851452db0ceeed9f400bdae454a3e088a0feaae6d7ed86e2a16"
     }
   }
 }

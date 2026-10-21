@@ -416,13 +416,21 @@
       "behavior": "malformed tool results block without poisoning the durable checkpoint",
       "status": "PASS",
       "evidence": "pnpm test: Companion 2.0 integrated"
+    },
+    {
+      "componentIds": [
+        "I"
+      ],
+      "file": "tests/v2/integration.test.mjs",
+      "behavior": "Authorized CLI probe rejects implicit execution, unauthorized executables and revision-only metadata; recognizes live semantic version",
+      "status": "PASS",
+      "evidence": "docs/validation-results.json followUp"
     }
   ],
   "externalValidation": [
-    "live REA/host skill routing",
-    "blind agent benchmark",
-    "Node 20 minimum version",
-    "Windows",
-    "macOS"
+    "Windows native execution",
+    "macOS native execution",
+    "Claude Code live-session routing",
+    "automatic global V2 host routing"
   ]
 }

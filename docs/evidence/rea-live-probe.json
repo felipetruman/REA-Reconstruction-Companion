@@ -1,0 +1,27 @@
+{
+  "reaFound": true,
+  "reaPath": "/home/freedom/.agents/skills/reverse-engineer-anything/SKILL.md",
+  "realPath": "/home/freedom/.agents/skills/reverse-engineer-anything/SKILL.md",
+  "version": "4.1.0",
+  "companionFound": true,
+  "companionPath": "/home/freedom/.zit/rea-reconstruction-companion-2eca41c9e9d46afd/ws/dc673892/tree/skills/rea-reconstruction-companion/SKILL.md",
+  "active": true,
+  "compatible": true,
+  "tools": [],
+  "runtimeVerified": false,
+  "host": "codex",
+  "conflicts": [],
+  "recommendedAction": "Invoke both skills explicitly; CLI availability does not prove host routing",
+  "limitations": [
+    "An explicitly authorized CLI version command ran. This verifies availability and version, not automatic host routing or tool correctness."
+  ],
+  "versionSource": "authorized-cli-probe",
+  "probe": {
+    "executable": "/home/freedom/.nvm/versions/node/v24.19.0/bin/rea",
+    "args": [
+      "--version"
+    ],
+    "exitCode": 0,
+    "stdout": "4.1.0"
+  }
+}

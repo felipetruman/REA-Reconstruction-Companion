@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
 import crypto from 'node:crypto';
+import { localCommand } from '../adapters/local.mjs';
 import { atomicWrite, canonical, digest, noSymlinks } from '../evidence/index.mjs';
 import { patchRea, BEGIN, END, planInstall, applyInstall } from '../../skills/rea-reconstruction-companion/scripts/installer.mjs';
 
@@ -58,6 +59,18 @@ export function diagnose({reaPath,companionPath,tools=[],host='generic',expected
   return {reaFound,reaPath:rea,realPath:rea?fs.realpathSync(rea):null,version,companionFound:!!companion,companionPath:companion,active:!!owned,compatible,tools:tools.filter(t=>typeof t==='string'),runtimeVerified,host,conflicts,
     recommendedAction:!reaFound?'Supply an existing REA skill path':!compatible?'Review version/marker compatibility before legacy integration':!runtimeVerified?'Invoke both skills explicitly and provide a host acknowledgement':'No corrective action',
     limitations:['Files and caller-reported tool names do not prove live routing. No model or host process was invoked.']};
+}
+// Optional process execution stays separate from read-only filesystem diagnosis.
+export async function probeRea({execute=false,command,cwd,...options}={}) {
+  if(!execute)throw new Error('Explicit execute mode required for CLI probe');
+  const observed=await localCommand(command,{cwd,allowedExecutables:options.allowedExecutables,timeoutMs:5000,maxBytes:4096});
+  const version=/^(?:rea\s+)?v?([0-9]+\.[0-9]+\.[0-9]+)(?:[-+][0-9A-Za-z.-]+)?\s*$/i.exec(observed.stdout.trim())?.[1];
+  if(!version)throw new Error('Unrecognized REA CLI version response');
+  const diagnosis=diagnose(options),major=Number(version.split('.')[0]);
+  return {...diagnosis,version,versionSource:'authorized-cli-probe',compatible:diagnosis.reaFound&&major>=4&&major<=6&&!diagnosis.conflicts.length,
+    recommendedAction:!diagnosis.reaFound?'Supply an existing REA skill path':major<4||major>6?'Review CLI compatibility':'Invoke both skills explicitly; CLI availability does not prove host routing',
+    probe:{executable:command.executable,args:command.args,exitCode:observed.exitCode,stdout:observed.stdout.trim()},
+    limitations:['An explicitly authorized CLI version command ran. This verifies availability and version, not automatic host routing or tool correctness.']};
 }
 export function integrationPlan({reaPath,companionPath,mode='explicit',host='generic'}) {
   if(!['explicit','legacy'].includes(mode))throw new Error('Unknown integration mode');

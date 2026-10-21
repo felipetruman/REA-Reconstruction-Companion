@@ -89,7 +89,9 @@ capitalization is rejected rather than choosing a file accidentally.
 
 Diagnostics report filesystem/version compatibility separately from actual host
 activation. Only caller-supplied host acknowledgement can report live loading;
-no model session was started to verify this during development. Compatibility
+the current Codex session explicitly read both skills; automatic routing and
+Claude Code loading remain unverified. An opt-in bounded CLI probe verifies
+REA version separately from skill metadata revision. Compatibility
 currently recognizes REA majors 4–6 and is not proof all REA releases work.
 
 Official host interfaces checked on 2026-10-20:

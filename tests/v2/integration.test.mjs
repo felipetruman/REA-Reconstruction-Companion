@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { createRequire } from 'node:module';
-import { discover, diagnose, integrationPlan, applyIntegration, uninstallIntegration, installCompanion } from '../../src/integration/index.mjs';
+import { probeRea, discover, diagnose, integrationPlan, applyIntegration, uninstallIntegration, installCompanion } from '../../src/integration/index.mjs';
 function fixture(t,version='4.1.0') {
   const root=fs.mkdtempSync(path.join(os.tmpdir(),'REA space '));t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
   const rea=path.join(root,'Custom REA');fs.mkdirSync(rea);const file=path.join(rea,'skill.md');
@@ -51,4 +51,17 @@ test('native scoped installation verifies files, detects drift and preserves cus
   fs.appendFileSync(path.join(installed.destination,'SKILL.md'),'\ncustomization\n');assert.equal(installCompanion({skillsDir,host:'codex'}).status,'DRIFT');
   assert.throws(()=>installCompanion({skillsDir,host:'codex',execute:true}),/replace|differ|existing|Replace|replacement/i);
   assert.equal(installCompanion({skillsDir,host:'codex',execute:true,replace:true}).status,'VERIFIED');
+});
+
+test('live version probe requires explicit authorization and never mistakes skill revision for CLI version',async t=>{
+  const {root,file}=fixture(t);fs.writeFileSync(file,'---\nname: reverse-engineer-anything\nmetadata:\n  version: "26"\n---\n');
+  assert.equal(diagnose({reaPath:file}).version,null);
+  const command={executable:process.execPath,args:['-e','console.log("rea 4.1.0")']};
+  const options={reaPath:file,cwd:root,command,allowedExecutables:[process.execPath]};
+  await assert.rejects(probeRea(options),/execute/);
+  await assert.rejects(probeRea({...options,execute:true,allowedExecutables:[]}),/authorized/);
+  const result=await probeRea({...options,execute:true});
+  assert.equal(result.version,'4.1.0');assert.equal(result.compatible,true);
+  assert.equal(result.runtimeVerified,false);assert.equal(result.versionSource,'authorized-cli-probe');
+  await assert.rejects(probeRea({...options,execute:true,command:{...command,args:['-e','console.log("revision 26")']}}),/version/);
 });
