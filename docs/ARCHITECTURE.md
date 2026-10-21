@@ -89,8 +89,8 @@ capitalization is rejected rather than choosing a file accidentally.
 
 Diagnostics report filesystem/version compatibility separately from actual host
 activation. Only caller-supplied host acknowledgement can report live loading;
-the current Codex session explicitly read both skills; automatic routing and
-Claude Code loading remain unverified. An opt-in bounded CLI probe verifies
+real Codex and Claude Code sessions explicitly read both skills; automatic
+routing remains unverified. An opt-in bounded CLI probe verifies
 REA version separately from skill metadata revision. Compatibility
 currently recognizes REA majors 4–6 and is not proof all REA releases work.
 
@@ -106,7 +106,9 @@ or use networking. Use it only for trusted authorized local fixtures/tools.
 Unknown software requires an externally provided disposable sandbox adapter.
 No CPU/memory/network isolation is claimed. In-process callbacks must cooperate
 with cancellation; a synchronous blocking callback cannot be preempted by Node.
-Windows process-tree cleanup and actual Windows/macOS execution are unvalidated.
+Native Windows/macOS source and release execution passed the nine-job CI matrix.
+Windows descendant-process-tree cleanup is not supplied by this adapter; the
+POSIX SIGTERM test is skipped there, while AbortSignal cancellation is tested.
 
 Telemetry is local. Host tokens require explicit source attribution; byte-based
 token figures are labeled estimates. The application neither enables billing nor

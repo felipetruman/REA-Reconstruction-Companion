@@ -1,0 +1,322 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "PASS",
+  "runId": 39596708981,
+  "url": "https://github.com/felipetruman/REA-Reconstruction-Companion/actions/runs/39596708981",
+  "sourceSha": "37d635325947242c672f348bfe70bbc0268bd9fb",
+  "jobsPassed": 9,
+  "jobsTotal": 9,
+  "jobs": [
+    {
+      "name": "test (ubuntu-latest, 22)",
+      "url": "https://github.com/felipetruman/REA-Reconstruction-Companion/actions/runs/39596708981/job/119210696575",
+      "status": "PASS",
+      "startedAt": "2026-10-21T12:04:25Z",
+      "completedAt": "2026-10-21T12:05:41Z",
+      "validations": [
+        {
+          "scope": "source",
+          "counts": {
+            "tests": 619,
+            "pass": 616,
+            "fail": 0,
+            "cancelled": 0,
+            "skipped": 3,
+            "todo": 0
+          },
+          "gate": "passed"
+        },
+        {
+          "scope": "extracted-release",
+          "counts": {
+            "tests": 619,
+            "pass": 616,
+            "fail": 0,
+            "cancelled": 0,
+            "skipped": 3,
+            "todo": 0
+          },
+          "gate": "passed"
+        }
+      ],
+      "logSha256": "ec0e3876398ad97bf5b91602726647e667bab685e2311b6c58da918b74128f9d"
+    },
+    {
+      "name": "test (ubuntu-latest, 24)",
+      "url": "https://github.com/felipetruman/REA-Reconstruction-Companion/actions/runs/39596708981/job/119210697028",
+      "status": "PASS",
+      "startedAt": "2026-10-21T12:04:25Z",
+      "completedAt": "2026-10-21T12:05:28Z",
+      "validations": [
+        {
+          "scope": "source",
+          "counts": {
+            "tests": 619,
+            "pass": 616,
+            "fail": 0,
+            "cancelled": 0,
+            "skipped": 3,
+            "todo": 0
+          },
+          "gate": "passed"
+        },
+        {
+          "scope": "extracted-release",
+          "counts": {
+            "tests": 619,
+            "pass": 616,
+            "fail": 0,
+            "cancelled": 0,
+            "skipped": 3,
+            "todo": 0
+          },
+          "gate": "passed"
+        }
+      ],
+      "logSha256": "50f394f445cf5ce2966c9d36946eaf3840c441918f31fe344006800144f54e69"
+    },
+    {
+      "name": "test (macos-latest, 22)",
+      "url": "https://github.com/felipetruman/REA-Reconstruction-Companion/actions/runs/39596708981/job/119210697049",
+      "status": "PASS",
+      "startedAt": "2026-10-21T12:04:26Z",
+      "completedAt": "2026-10-21T12:06:31Z",
+      "validations": [
+        {
+          "scope": "source",
+          "counts": {
+            "tests": 619,
+            "pass": 619,
+            "fail": 0,
+            "cancelled": 0,
+            "skipped": 0,
+            "todo": 0
+          },
+          "gate": "passed"
+        },
+        {
+          "scope": "extracted-release",
+          "counts": {
+            "tests": 619,
+            "pass": 619,
+            "fail": 0,
+            "cancelled": 0,
+            "skipped": 0,
+            "todo": 0
+          },
+          "gate": "passed"
+        }
+      ],
+      "logSha256": "d94ee004690f888e66dd9dc55e104a32a504b122f70b236f4a20d6f03720e054"
+    },
+    {
+      "name": "test (windows-latest, 24)",
+      "url": "https://github.com/felipetruman/REA-Reconstruction-Companion/actions/runs/39596708981/job/119210697074",
+      "status": "PASS",
+      "startedAt": "2026-10-21T12:04:29Z",
+      "completedAt": "2026-10-21T12:08:00Z",
+      "validations": [
+        {
+          "scope": "source",
+          "counts": {
+            "tests": 619,
+            "pass": 618,
+            "fail": 0,
+            "cancelled": 0,
+            "skipped": 1,
+            "todo": 0
+          },
+          "gate": "passed"
+        },
+        {
+          "scope": "extracted-release",
+          "counts": {
+            "tests": 619,
+            "pass": 618,
+            "fail": 0,
+            "cancelled": 0,
+            "skipped": 1,
+            "todo": 0
+          },
+          "gate": "passed"
+        }
+      ],
+      "logSha256": "fc083e7844370a0ff1625972a6a0b61f9a4bfc3bf6e4cfa6fc29a295956d7ccf"
+    },
+    {
+      "name": "test (macos-latest, 20)",
+      "url": "https://github.com/felipetruman/REA-Reconstruction-Companion/actions/runs/39596708981/job/119210697095",
+      "status": "PASS",
+      "startedAt": "2026-10-21T12:04:25Z",
+      "completedAt": "2026-10-21T12:05:57Z",
+      "validations": [
+        {
+          "scope": "source",
+          "counts": {
+            "tests": 619,
+            "pass": 619,
+            "fail": 0,
+            "cancelled": 0,
+            "skipped": 0,
+            "todo": 0
+          },
+          "gate": "passed"
+        },
+        {
+          "scope": "extracted-release",
+          "counts": {
+            "tests": 619,
+            "pass": 619,
+            "fail": 0,
+            "cancelled": 0,
+            "skipped": 0,
+            "todo": 0
+          },
+          "gate": "passed"
+        }
+      ],
+      "logSha256": "a06c66fe1fd7e1fa75922b104e9ccd267ec887549affc2af9f2cdce723768b39"
+    },
+    {
+      "name": "test (windows-latest, 22)",
+      "url": "https://github.com/felipetruman/REA-Reconstruction-Companion/actions/runs/39596708981/job/119210697119",
+      "status": "PASS",
+      "startedAt": "2026-10-21T12:04:25Z",
+      "completedAt": "2026-10-21T12:08:25Z",
+      "validations": [
+        {
+          "scope": "source",
+          "counts": {
+            "tests": 619,
+            "pass": 618,
+            "fail": 0,
+            "cancelled": 0,
+            "skipped": 1,
+            "todo": 0
+          },
+          "gate": "passed"
+        },
+        {
+          "scope": "extracted-release",
+          "counts": {
+            "tests": 619,
+            "pass": 618,
+            "fail": 0,
+            "cancelled": 0,
+            "skipped": 1,
+            "todo": 0
+          },
+          "gate": "passed"
+        }
+      ],
+      "logSha256": "390af452229002c531e570c432ff9f87a8980c8341afc17eb7243172141f6239"
+    },
+    {
+      "name": "test (ubuntu-latest, 20)",
+      "url": "https://github.com/felipetruman/REA-Reconstruction-Companion/actions/runs/39596708981/job/119210697160",
+      "status": "PASS",
+      "startedAt": "2026-10-21T12:04:25Z",
+      "completedAt": "2026-10-21T12:05:49Z",
+      "validations": [
+        {
+          "scope": "source",
+          "counts": {
+            "tests": 619,
+            "pass": 616,
+            "fail": 0,
+            "cancelled": 0,
+            "skipped": 3,
+            "todo": 0
+          },
+          "gate": "passed"
+        },
+        {
+          "scope": "extracted-release",
+          "counts": {
+            "tests": 619,
+            "pass": 616,
+            "fail": 0,
+            "cancelled": 0,
+            "skipped": 3,
+            "todo": 0
+          },
+          "gate": "passed"
+        }
+      ],
+      "logSha256": "24aa2a47d05f95226c0d0bd7cbc5277440170b5093356d8e86f326b5c4190621"
+    },
+    {
+      "name": "test (windows-latest, 20)",
+      "url": "https://github.com/felipetruman/REA-Reconstruction-Companion/actions/runs/39596708981/job/119210697192",
+      "status": "PASS",
+      "startedAt": "2026-10-21T12:04:25Z",
+      "completedAt": "2026-10-21T12:09:09Z",
+      "validations": [
+        {
+          "scope": "source",
+          "counts": {
+            "tests": 619,
+            "pass": 618,
+            "fail": 0,
+            "cancelled": 0,
+            "skipped": 1,
+            "todo": 0
+          },
+          "gate": "passed"
+        },
+        {
+          "scope": "extracted-release",
+          "counts": {
+            "tests": 619,
+            "pass": 618,
+            "fail": 0,
+            "cancelled": 0,
+            "skipped": 1,
+            "todo": 0
+          },
+          "gate": "passed"
+        }
+      ],
+      "logSha256": "3ed5c516d2157a172f2749a9d0f982b8f0b32f29d8fb40938326ba8edec5ad12"
+    },
+    {
+      "name": "test (macos-latest, 24)",
+      "url": "https://github.com/felipetruman/REA-Reconstruction-Companion/actions/runs/39596708981/job/119210697234",
+      "status": "PASS",
+      "startedAt": "2026-10-21T12:04:25Z",
+      "completedAt": "2026-10-21T12:06:12Z",
+      "validations": [
+        {
+          "scope": "source",
+          "counts": {
+            "tests": 619,
+            "pass": 619,
+            "fail": 0,
+            "cancelled": 0,
+            "skipped": 0,
+            "todo": 0
+          },
+          "gate": "passed"
+        },
+        {
+          "scope": "extracted-release",
+          "counts": {
+            "tests": 619,
+            "pass": 619,
+            "fail": 0,
+            "cancelled": 0,
+            "skipped": 0,
+            "todo": 0
+          },
+          "gate": "passed"
+        }
+      ],
+      "logSha256": "9ea2d23f9a40b45f8bc7cf79487616873d71ce75d8fe18e8ed794f15000087f2"
+    }
+  ],
+  "limitations": [
+    "Explicit Claude skill loading validated separately; automatic routing not demonstrated.",
+    "POSIX SIGTERM test skipped on Windows; portable AbortSignal cancellation tested.",
+    "Windows directory fsync unavailable; file fsync and atomic rename retained."
+  ]
+}

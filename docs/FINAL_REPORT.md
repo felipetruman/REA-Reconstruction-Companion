@@ -7,7 +7,7 @@
 | Autonomous Runtime | Implemented | runtime, resources and real CLI E2E | Trusted injected tools; no automatic AI agent; callbacks must cooperate |
 | Evidence Engine | Implemented | evidence, hardening, resources | Local atomic persistence; interrupted store locks need inspection |
 | Validation Engine | Implemented | validation, benchmark, bad-candidate E2E | Genuine oracle provenance belongs to independent provider; single-target held-out evaluation FAIL 63/64; correctly BLOCKED |
-| REA Integration Adapter | Implemented | isolated integration and original installer regression | REA CLI 4.1.0 inspected an actual ELF; current Codex loaded both source skills explicitly; automatic routing unverified; REA major compatibility bounded to 4–6 |
+| REA Integration Adapter | Implemented | isolated integration and original installer regression | REA CLI 4.1.0 inspected an actual ELF; Codex and Claude Code loaded both source skills explicitly; automatic routing unverified; REA major compatibility bounded to 4–6 |
 | Context Optimizer | Implemented | optimization, graph/candidate invalidation | Ambiguous impact uses full suite; host tokens absent unless explicitly reported |
 
 ## B. Files and purpose
@@ -80,13 +80,18 @@ current Codex session explicitly read both source skills. Optional
 from read-only file diagnosis; skill metadata revision 26 is not CLI semver.
 Evidence: [probe](evidence/rea-live-probe.json),
 [inspection](evidence/rea-live-inspection.json). This does not prove automatic
-routing, Claude Code activation, or a global V2 upgrade; global files unchanged.
+automatic routing or a global V2 upgrade; global files unchanged. A separate real
+Claude Code session subsequently verified explicit loading (evidence below).
 
-Windows/macOS native execution remains **NOT_RUN**: no corresponding local OS
-or VM is available. Existing public-repository CI already covers Ubuntu,
-Windows and macOS on Node 20/22/24. Running remote jobs requires a remote push,
-which this mission explicitly forbids automatically. No paid API, deployment,
-remote push or additional unapproved agent was used.
+Native CI now passed **9/9** jobs on Linux, Windows and macOS with Node
+20/22/24, testing both the source checkout and extracted release package.
+[Run](https://github.com/felipetruman/REA-Reconstruction-Companion/actions/runs/39596708981),
+[structured evidence](evidence/native-ci.json). Each run contains 619 tests:
+Linux 616 PASS/3 SKIP; macOS 619 PASS/0 SKIP; Windows 618 PASS/1 SKIP.
+The Windows skip is specifically the POSIX SIGTERM graceful-shutdown test;
+portable AbortSignal cancellation tests pass. No failures in any matrix job.
+User explicitly authorized fork publication and the separate Claude session;
+no paid API or deployment was configured. Automatic host routing remains unproven.
 
 Local Git integration is performed through accepted Zit records and local
 export, preserving history. This is not a published release. Local command

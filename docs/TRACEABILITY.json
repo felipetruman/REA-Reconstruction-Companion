@@ -428,9 +428,7 @@
     }
   ],
   "externalValidation": [
-    "Windows native execution",
-    "macOS native execution",
-    "Claude Code live-session routing",
-    "automatic global V2 host routing"
-  ]
+    "Automatic global host routing and Claude REA MCP availability not claimed."
+  ],
+  "nativeCI": "evidence/native-ci.json"
 }

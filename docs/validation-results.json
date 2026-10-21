@@ -75,10 +75,8 @@
     }
   },
   "notRun": [
-    "Windows native execution",
-    "macOS native execution",
-    "Claude Code live-session routing",
-    "automatic global V2 host routing"
+    "automatic global V2 host routing",
+    "REA MCP routing inside Claude session"
   ],
   "releaseVerification": "See release verification command; generated package is local, unpublished.",
   "node22": {
@@ -149,7 +147,12 @@
     "host": "current Codex session, explicitly read source skills",
     "automaticRouting": "NOT_RUN",
     "globalInstallation": "unchanged",
-    "evidence": "evidence/rea-live-inspection.json"
+    "evidence": "evidence/rea-live-inspection.json",
+    "claude": {
+      "status": "PASS",
+      "scope": "explicit-file-read",
+      "evidence": "evidence/claude-live-session.json"
+    }
   },
   "followUp": {
     "node20": {
@@ -176,5 +179,13 @@
       "runtimeState": "BLOCKED",
       "logSha256": "0a927373b6ac7851452db0ceeed9f400bdae454a3e088a0feaae6d7ed86e2a16"
     }
+  },
+  "nativeCI": {
+    "status": "PASS",
+    "jobsPassed": 9,
+    "jobsTotal": 9,
+    "sourceSha": "37d635325947242c672f348bfe70bbc0268bd9fb",
+    "url": "https://github.com/felipetruman/REA-Reconstruction-Companion/actions/runs/39596708981",
+    "evidence": "evidence/native-ci.json"
   }
 }

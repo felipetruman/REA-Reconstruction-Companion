@@ -89,11 +89,18 @@ explicit workflow and CLI availability, not automatic global activation.
 
 ## Limits of this evidence
 
-Windows and macOS execution remain NOT_RUN: corresponding local operating
-systems/VMs unavailable. The existing nine-job public CI matrix covers those
-platforms and Node 20/22/24, but has not been triggered by a remote push here.
-Claude Code loading and automatic global V2 routing remain NOT_RUN. Global
-host files unchanged. No extra API, billing, deployment or remote push.
+Native CI passed 9/9 jobs on Linux, Windows and macOS with Node 20/22/24.
+Both source and extracted release pass in every job. Structured counts, job
+URLs, source SHA and log digests: [native-ci.json](evidence/native-ci.json).
+The new directory durability regression raises the suite to 619 tests:
+Linux 616 PASS/3 SKIP, macOS 619 PASS/0 SKIP, Windows 618 PASS/1 SKIP.
+
+Claude Code explicitly read both skills in a real authorized session:
+[session evidence](evidence/claude-live-session.json). Automatic routing and REA
+MCP access inside that session are not established. Global host files unchanged.
+Windows skips only the POSIX SIGTERM test; portable cancellation tests pass.
+File fsync and atomic rename remain; Windows directory metadata fsync is
+unavailable through Node, so its power-loss durability remains best-effort.
 
 Agent development relied on protocol separation within a shared host, not a
 hostile-agent security boundary. Frozen candidate evaluation used pinned,
