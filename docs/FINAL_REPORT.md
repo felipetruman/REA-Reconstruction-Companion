@@ -91,3 +91,18 @@ remote push or additional unapproved agent was used.
 Local Git integration is performed through accepted Zit records and local
 export, preserving history. This is not a published release. Local command
 adapters still require trusted tools; they do not provide an OS sandbox.
+
+## Authorized remote/native follow-up
+
+A separate Claude Code session using the existing claude.ai subscription read
+REA, Companion and the runtime reference through actual Read tool calls.
+[Session evidence](evidence/claude-live-session.json) records successful tool
+results and the transcript digest. This validates explicit loading, not automatic
+routing, MCP discovery or end-to-end reconstruction inside Claude.
+
+The first authorized fork push was stopped by GitGuardian on a pre-existing
+`.NET public-key-token` fixture. Microsoft documents this as a public assembly
+identifier derived from a public key, not a credential:
+https://learn.microsoft.com/en-us/dotnet/api/system.reflection.assemblyname.getpublickeytoken
+A repository-local exact-match false-positive entry preserves all other scanning;
+no hook was disabled and no global policy was changed.

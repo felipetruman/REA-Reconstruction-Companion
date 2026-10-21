@@ -1,0 +1,6 @@
+secret:
+  ignored_matches:
+  - match: 73167bbf3691d6c951f3666e29212b7e70fef911c59f79202fe0f5d67055a378
+    name: 'Verified false positive: inherited .NET public assembly identifier, not
+      a credential; Microsoft AssemblyName.GetPublicKeyToken'
+version: 2
