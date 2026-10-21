@@ -1,13 +1,26 @@
 {
   "name": "rea-reconstruction-companion",
-  "version": "1.3.34",
+  "version": "2.0.0",
   "description": "Portable, evidence-based reconstruction workflows that cooperate with REA.",
   "type": "module",
   "license": "MIT",
   "engines": { "node": ">=20" },
+  "bin": { "rea-companion": "src/cli/index.mjs" },
+  "exports": {
+    "./evidence": "./src/evidence/index.mjs",
+    "./validation": "./src/validation/index.mjs",
+    "./runtime": "./src/runtime/index.mjs",
+    "./integration": "./src/integration/index.mjs",
+    "./optimization": "./src/optimization/index.mjs",
+    "./adapters/local": "./src/adapters/local.mjs"
+  },
   "scripts": {
     "test": "node scripts/run-checks.mjs",
     "manifest": "node scripts/manifest.mjs",
+    "test:v2": "node --test tests/v2/*.test.mjs",
+    "lint": "node scripts/check-runtime.mjs",
+    "companion": "node src/cli/index.mjs",
+    "benchmark:local": "node scripts/benchmark-local.mjs",
     "build": "python scripts/build_release.py"
   },
   "repository": { "type": "git", "url": "https://github.com/ShadowSwaps/REA-Reconstruction-Companion.git" }

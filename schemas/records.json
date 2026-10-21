@@ -1,0 +1,634 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shadow-swaps.local/companion/schemas/2.0.0/records.json",
+  "title": "Companion structured records 2.0.0",
+  "$defs": {
+    "Target": {
+      "type": "object",
+      "required": [
+        "type",
+        "id",
+        "schemaVersion",
+        "name",
+        "version",
+        "hash",
+        "platform",
+        "environment",
+        "scope",
+        "origin"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Target"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,127}$"
+        },
+        "schemaVersion": {
+          "type": "string",
+          "enum": [
+            "2.0.0"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "platform": {
+          "type": "string",
+          "minLength": 1
+        },
+        "environment": {
+          "type": "object"
+        },
+        "scope": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "origin": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "Evidence": {
+      "type": "object",
+      "required": [
+        "type",
+        "id",
+        "schemaVersion",
+        "targetId",
+        "targetVersion",
+        "targetHash",
+        "kind",
+        "origin",
+        "location",
+        "timestamp",
+        "scenario",
+        "hash",
+        "limitations"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Evidence"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,127}$"
+        },
+        "schemaVersion": {
+          "type": "string",
+          "enum": [
+            "2.0.0"
+          ]
+        },
+        "targetId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "targetVersion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "targetHash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "kind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "origin": {
+          "type": "string",
+          "minLength": 1
+        },
+        "location": {
+          "type": "string",
+          "minLength": 1
+        },
+        "timestamp": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scenario": {
+          "type": "string",
+          "minLength": 1
+        },
+        "hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "data": {},
+        "artifact": {
+          "type": "string",
+          "minLength": 1
+        },
+        "artifactHash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Finding": {
+      "type": "object",
+      "required": [
+        "type",
+        "id",
+        "schemaVersion",
+        "evidenceIds",
+        "claim",
+        "classification",
+        "conflicts",
+        "verification"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Finding"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,127}$"
+        },
+        "schemaVersion": {
+          "type": "string",
+          "enum": [
+            "2.0.0"
+          ]
+        },
+        "evidenceIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "claim": {
+          "type": "string",
+          "minLength": 1
+        },
+        "classification": {
+          "type": "string",
+          "enum": [
+            "observed",
+            "inferred",
+            "assumed",
+            "unknown"
+          ]
+        },
+        "conflicts": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "verification": {
+          "type": "string",
+          "enum": [
+            "verified",
+            "unverified",
+            "disputed"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "Requirement": {
+      "type": "object",
+      "required": [
+        "type",
+        "id",
+        "schemaVersion",
+        "description",
+        "acceptance",
+        "evidenceIds",
+        "findingIds",
+        "dependencies",
+        "priority",
+        "implementationStatus",
+        "validationStatus"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Requirement"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,127}$"
+        },
+        "schemaVersion": {
+          "type": "string",
+          "enum": [
+            "2.0.0"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "acceptance": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "evidenceIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "findingIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "dependencies": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "priority": {
+          "type": "string",
+          "enum": [
+            "critical",
+            "high",
+            "normal",
+            "low"
+          ]
+        },
+        "implementationStatus": {
+          "type": "string",
+          "enum": [
+            "pending",
+            "implemented",
+            "blocked"
+          ]
+        },
+        "validationStatus": {
+          "type": "string",
+          "enum": [
+            "PASS",
+            "FAIL",
+            "INCONCLUSIVE",
+            "NOT_RUN"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "Implementation": {
+      "type": "object",
+      "required": [
+        "type",
+        "id",
+        "schemaVersion",
+        "requirementIds",
+        "components",
+        "version",
+        "hash"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Implementation"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,127}$"
+        },
+        "schemaVersion": {
+          "type": "string",
+          "enum": [
+            "2.0.0"
+          ]
+        },
+        "requirementIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "components": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Oracle": {
+      "type": "object",
+      "required": [
+        "type",
+        "id",
+        "schemaVersion",
+        "kind",
+        "identity",
+        "independent",
+        "limitations"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Oracle"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,127}$"
+        },
+        "schemaVersion": {
+          "type": "string",
+          "enum": [
+            "2.0.0"
+          ]
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "recording",
+            "specification",
+            "invariant",
+            "contract",
+            "corpus"
+          ]
+        },
+        "identity": {
+          "type": "string",
+          "minLength": 1
+        },
+        "independent": {
+          "type": "boolean"
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "Validation": {
+      "type": "object",
+      "required": [
+        "type",
+        "id",
+        "schemaVersion",
+        "requirementId",
+        "oracleId",
+        "target",
+        "candidate",
+        "environment",
+        "corpus",
+        "expected",
+        "observed",
+        "status",
+        "logs",
+        "artifacts"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Validation"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,127}$"
+        },
+        "schemaVersion": {
+          "type": "string",
+          "enum": [
+            "2.0.0"
+          ]
+        },
+        "requirementId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "oracleId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "target": {
+          "type": "object"
+        },
+        "candidate": {
+          "type": "object"
+        },
+        "environment": {
+          "type": "object"
+        },
+        "corpus": {
+          "type": "object"
+        },
+        "expected": {},
+        "observed": {},
+        "status": {
+          "type": "string",
+          "enum": [
+            "PASS",
+            "FAIL",
+            "INCONCLUSIVE",
+            "NOT_RUN"
+          ]
+        },
+        "logs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "artifacts": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "critical": {
+          "type": "boolean"
+        },
+        "implementationIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "Checkpoint": {
+      "type": "object",
+      "required": [
+        "type",
+        "id",
+        "schemaVersion",
+        "target",
+        "workflowState",
+        "completed",
+        "pending",
+        "decisions",
+        "blockers",
+        "evidenceIds",
+        "validationIds"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Checkpoint"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,127}$"
+        },
+        "schemaVersion": {
+          "type": "string",
+          "enum": [
+            "2.0.0"
+          ]
+        },
+        "target": {
+          "type": "object"
+        },
+        "workflowState": {
+          "type": "string",
+          "enum": [
+            "INVESTIGATE",
+            "SPECIFY",
+            "IMPLEMENT",
+            "VALIDATE",
+            "DIAGNOSE",
+            "REPAIR",
+            "REVALIDATE",
+            "COMPLETE",
+            "BLOCKED",
+            "CANCELLED"
+          ]
+        },
+        "completed": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "pending": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "decisions": {
+          "type": "array"
+        },
+        "blockers": {
+          "type": "array"
+        },
+        "evidenceIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "validationIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "oneOf": [
+    {
+      "$ref": "#/$defs/Target"
+    },
+    {
+      "$ref": "#/$defs/Evidence"
+    },
+    {
+      "$ref": "#/$defs/Finding"
+    },
+    {
+      "$ref": "#/$defs/Requirement"
+    },
+    {
+      "$ref": "#/$defs/Implementation"
+    },
+    {
+      "$ref": "#/$defs/Oracle"
+    },
+    {
+      "$ref": "#/$defs/Validation"
+    },
+    {
+      "$ref": "#/$defs/Checkpoint"
+    }
+  ]
+}

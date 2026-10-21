@@ -352,3 +352,25 @@ Bug reports, reproducible examples and focused pull requests are also welcome. R
 ## License
 
 All original code, skill instructions, tests, build scripts, and documentation in this repository are released under the [MIT license](LICENSE). You may use, modify, and redistribute them, including commercially, subject to that license. The evaluation kit includes a small, attributed [Wycheproof test-data subset](evals/fixtures/wycheproof-empty.json) under its bundled [Apache-2.0 license](evals/fixtures/wycheproof-LICENSE.txt); it remains fully open-source. Upstream REA and linked research remain separate projects; no REA code or cryptographic implementation is bundled. No particular AI provider or proprietary model is required by this project.
+
+## Optional Companion 2.0 runtime
+
+The portable Markdown skill and original installer remain supported. An optional,
+dependency-free Node.js 20+ runtime now provides versioned evidence, independent
+validation, bounded resumable workflows, scoped REA integration and selective
+context/cache/impact analysis. No model, daemon, network service or paid API is started.
+
+Start with [runtime usage](docs/USAGE.md), [architecture](docs/ARCHITECTURE.md),
+[requirements](docs/PRD.md), [design](docs/SDD.md),
+[traceability](docs/TRACEABILITY.md) and [measured validation](docs/VALIDATION.md).
+
+```sh
+pnpm test
+pnpm lint
+node src/cli/index.mjs help
+```
+
+Inspection writes nothing. Execution requires `--execute` and an explicit
+executable allowlist. This permission boundary is not an OS sandbox. Existing
+`node install.mjs` options retain their previous meanings. Installing the skill
+does not globally install or automatically invoke the optional runtime.

@@ -1,0 +1,428 @@
+{
+  "schemaVersion": "1.0.0",
+  "acceptance": [
+    {
+      "componentIds": [
+        "R",
+        "E",
+        "V",
+        "I",
+        "O"
+      ],
+      "file": "tests/v2/e2e.test.mjs",
+      "behavior": "CLI read-only plan, explicit real reconstruction, checkpoint resume, report and validation",
+      "status": "PASS",
+      "evidence": "pnpm test: Companion 2.0 integrated"
+    },
+    {
+      "componentIds": [
+        "R",
+        "E",
+        "V",
+        "I",
+        "O"
+      ],
+      "file": "tests/v2/e2e.test.mjs",
+      "behavior": "incorrect real candidate cannot complete; integrity-protected checkpoint and evidence are persisted",
+      "status": "PASS",
+      "evidence": "pnpm test: Companion 2.0 integrated"
+    },
+    {
+      "componentIds": [
+        "R",
+        "E",
+        "V",
+        "I",
+        "O"
+      ],
+      "file": "tests/v2/e2e.test.mjs",
+      "behavior": "local adapter denies ungranted executables, bounds time/output and never invokes a shell",
+      "status": "PASS",
+      "evidence": "pnpm test: Companion 2.0 integrated"
+    },
+    {
+      "componentIds": [
+        "R",
+        "E",
+        "V",
+        "I",
+        "O"
+      ],
+      "file": "tests/v2/e2e.test.mjs",
+      "behavior": "SIGTERM during real subprocess execution persists cancellation and resumes safely",
+      "status": "PASS",
+      "evidence": "pnpm test: Companion 2.0 integrated"
+    },
+    {
+      "componentIds": [
+        "R",
+        "E",
+        "V",
+        "I",
+        "O"
+      ],
+      "file": "tests/v2/e2e.test.mjs",
+      "behavior": "explicit validation after candidate tampering invalidates COMPLETE",
+      "status": "PASS",
+      "evidence": "pnpm test: Companion 2.0 integrated"
+    },
+    {
+      "componentIds": [
+        "E"
+      ],
+      "file": "tests/v2/evidence.test.mjs",
+      "behavior": "canonical identity is deterministic and validates formal mandatory fields",
+      "status": "PASS",
+      "evidence": "pnpm test: Companion 2.0 integrated"
+    },
+    {
+      "componentIds": [
+        "E"
+      ],
+      "file": "tests/v2/evidence.test.mjs",
+      "behavior": "store recovers verified records; duplicate is idempotent, inconsistent duplicate rejected",
+      "status": "PASS",
+      "evidence": "pnpm test: Companion 2.0 integrated"
+    },
+    {
+      "componentIds": [
+        "E"
+      ],
+      "file": "tests/v2/evidence.test.mjs",
+      "behavior": "corruption, stale writers, broken refs and interrupted writes cannot silently replace data",
+      "status": "PASS",
+      "evidence": "pnpm test: Companion 2.0 integrated"
+    },
+    {
+      "componentIds": [
+        "E"
+      ],
+      "file": "tests/v2/evidence.test.mjs",
+      "behavior": "graph detects unsupported, contradictory, blocked, stale and missing acceptance",
+      "status": "PASS",
+      "evidence": "pnpm test: Companion 2.0 integrated"
+    },
+    {
+      "componentIds": [
+        "E"
+      ],
+      "file": "tests/v2/evidence.test.mjs",
+      "behavior": "evidence hash, invalid schema, traversal, symlink and size boundaries",
+      "status": "PASS",
+      "evidence": "pnpm test: Companion 2.0 integrated"
+    },
+    {
+      "componentIds": [
+        "E",
+        "R",
+        "O"
+      ],
+      "file": "tests/v2/hardening.test.mjs",
+      "behavior": "historical PASS does not conceal newest failure or obsolete target validation",
+      "status": "PASS",
+      "evidence": "pnpm test: Companion 2.0 integrated"
+    },
+    {
+      "componentIds": [
+        "E",
+        "R",
+        "O"
+      ],
+      "file": "tests/v2/hardening.test.mjs",
+      "behavior": "typed references and non-independent oracles are inconsistent",
+      "status": "PASS",
+      "evidence": "pnpm test: Companion 2.0 integrated"
+    },
+    {
+      "componentIds": [
+        "E",
+        "R",
+        "O"
+      ],
+      "file": "tests/v2/hardening.test.mjs",
+      "behavior": "reference loading is selective, bounded and discloses omitted data",
+      "status": "PASS",
+      "evidence": "pnpm test: Companion 2.0 integrated"
+    },
+    {
+      "componentIds": [
+        "E",
+        "R",
+        "O"
+      ],
+      "file": "tests/v2/hardening.test.mjs",
+      "behavior": "runtime plan identity prevents config substitution during resume",
+      "status": "PASS",
+      "evidence": "pnpm test: Companion 2.0 integrated"
+    },
+    {
+      "componentIds": [
+        "I"
+      ],
+      "file": "tests/v2/integration.test.mjs",
+      "behavior": "absent, unknown and outdated REA are diagnosed without invented tools",
+      "status": "PASS",
+      "evidence": "pnpm test: Companion 2.0 integrated"
+    },
+    {
+      "componentIds": [
+        "I"
+      ],
+      "file": "tests/v2/integration.test.mjs",
+      "behavior": "native activation leaves canonical REA intact and needs actual host acknowledgement",
+      "status": "PASS",
+      "evidence": "pnpm test: Companion 2.0 integrated"
+    },
+    {
+      "componentIds": [
+        "I"
+      ],
+      "file": "tests/v2/integration.test.mjs",
+      "behavior": "legacy install is previewable, idempotent, backed up and reversible preserving customizations",
+      "status": "PASS",
+      "evidence": "pnpm test: Companion 2.0 integrated"
+    },
+    {
+      "componentIds": [
+        "I"
+      ],
+      "file": "tests/v2/integration.test.mjs",
+      "behavior": "external block modification, stale plan, ambiguous case and symlink fail safely",
+      "status": "PASS",
+      "evidence": "pnpm test: Companion 2.0 integrated"
+    },
+    {
+      "componentIds": [
+        "I"
+      ],
+      "file": "tests/v2/integration.test.mjs",
+      "behavior": "native scoped installation verifies files, detects drift and preserves customizations until explicit replacement",
+      "status": "PASS",
+      "evidence": "pnpm test: Companion 2.0 integrated"
+    },
+    {
+      "componentIds": [
+        "O"
+      ],
+      "file": "tests/v2/optimization.test.mjs",
+      "behavior": "cache persists exact identities, counts hits/misses, invalidates dependents and preserves history",
+      "status": "PASS",
+      "evidence": "pnpm test: Companion 2.0 integrated"
+    },
+    {
+      "componentIds": [
+        "O"
+      ],
+      "file": "tests/v2/optimization.test.mjs",
+      "behavior": "shared dependencies expand regression scope and uncertainty/full completion select entire suite",
+      "status": "PASS",
+      "evidence": "pnpm test: Companion 2.0 integrated"
+    },
+    {
+      "componentIds": [
+        "O"
+      ],
+      "file": "tests/v2/optimization.test.mjs",
+      "behavior": "selective references always preserve authority; summaries deduplicate, bound and disclose omissions",
+      "status": "PASS",
+      "evidence": "pnpm test: Companion 2.0 integrated"
+    },
+    {
+      "componentIds": [
+        "O"
+      ],
+      "file": "tests/v2/optimization.test.mjs",
+      "behavior": "telemetry records observed counts and labels token estimates",
+      "status": "PASS",
+      "evidence": "pnpm test: Companion 2.0 integrated"
+    },
+    {
+      "componentIds": [
+        "E",
+        "R",
+        "O"
+      ],
+      "file": "tests/v2/resources.test.mjs",
+      "behavior": "artifact references verify real bytes and reject corruption/traversal",
+      "status": "PASS",
+      "evidence": "pnpm test: Companion 2.0 integrated"
+    },
+    {
+      "componentIds": [
+        "E",
+        "R",
+        "O"
+      ],
+      "file": "tests/v2/resources.test.mjs",
+      "behavior": "operation budget includes actual candidate tool calls and total deadline includes active elapsed time",
+      "status": "PASS",
+      "evidence": "pnpm test: Companion 2.0 integrated"
+    },
+    {
+      "componentIds": [
+        "E",
+        "R",
+        "O"
+      ],
+      "file": "tests/v2/resources.test.mjs",
+      "behavior": "formal checkpoint records are connected to real workflow state",
+      "status": "PASS",
+      "evidence": "pnpm test: Companion 2.0 integrated"
+    },
+    {
+      "componentIds": [
+        "E",
+        "R",
+        "O"
+      ],
+      "file": "tests/v2/resources.test.mjs",
+      "behavior": "target version changes invalidate execution instead of reusing cached proof",
+      "status": "PASS",
+      "evidence": "pnpm test: Companion 2.0 integrated"
+    },
+    {
+      "componentIds": [
+        "E",
+        "R",
+        "O"
+      ],
+      "file": "tests/v2/resources.test.mjs",
+      "behavior": "dead owner lock recovery is explicit; live owner cannot be removed",
+      "status": "PASS",
+      "evidence": "pnpm test: Companion 2.0 integrated"
+    },
+    {
+      "componentIds": [
+        "R"
+      ],
+      "file": "tests/v2/runtime.test.mjs",
+      "behavior": "task planner rejects missing dependencies, cycles and unauthorized scope",
+      "status": "PASS",
+      "evidence": "pnpm test: Companion 2.0 integrated"
+    },
+    {
+      "componentIds": [
+        "R"
+      ],
+      "file": "tests/v2/runtime.test.mjs",
+      "behavior": "inspection does not write; explicit run repairs and independently revalidates to completion",
+      "status": "PASS",
+      "evidence": "pnpm test: Companion 2.0 integrated"
+    },
+    {
+      "componentIds": [
+        "R"
+      ],
+      "file": "tests/v2/runtime.test.mjs",
+      "behavior": "critical false success is rejected; three equivalent failures block with hypothesis",
+      "status": "PASS",
+      "evidence": "pnpm test: Companion 2.0 integrated"
+    },
+    {
+      "componentIds": [
+        "R"
+      ],
+      "file": "tests/v2/runtime.test.mjs",
+      "behavior": "cancelled checkpoint resumes without discarding completed investigation",
+      "status": "PASS",
+      "evidence": "pnpm test: Companion 2.0 integrated"
+    },
+    {
+      "componentIds": [
+        "R"
+      ],
+      "file": "tests/v2/runtime.test.mjs",
+      "behavior": "stage and operation budgets stop execution and preserve checkpoints",
+      "status": "PASS",
+      "evidence": "pnpm test: Companion 2.0 integrated"
+    },
+    {
+      "componentIds": [
+        "R"
+      ],
+      "file": "tests/v2/runtime.test.mjs",
+      "behavior": "unverifiable success and uncovered critical requirements never COMPLETE",
+      "status": "PASS",
+      "evidence": "pnpm test: Companion 2.0 integrated"
+    },
+    {
+      "componentIds": [
+        "V"
+      ],
+      "file": "tests/v2/validation.test.mjs",
+      "behavior": "preserved independent oracle detects bad candidate and all observation channels",
+      "status": "PASS",
+      "evidence": "pnpm test: Companion 2.0 integrated"
+    },
+    {
+      "componentIds": [
+        "V"
+      ],
+      "file": "tests/v2/validation.test.mjs",
+      "behavior": "absent, self generated and incomplete oracles never pass",
+      "status": "PASS",
+      "evidence": "pnpm test: Companion 2.0 integrated"
+    },
+    {
+      "componentIds": [
+        "V"
+      ],
+      "file": "tests/v2/validation.test.mjs",
+      "behavior": "infrastructure failure cannot masquerade as an expected business error",
+      "status": "PASS",
+      "evidence": "pnpm test: Companion 2.0 integrated"
+    },
+    {
+      "componentIds": [
+        "V"
+      ],
+      "file": "tests/v2/validation.test.mjs",
+      "behavior": "intentional differences require scenario-bound authorization and retain original mismatch",
+      "status": "PASS",
+      "evidence": "pnpm test: Companion 2.0 integrated"
+    },
+    {
+      "componentIds": [
+        "V"
+      ],
+      "file": "tests/v2/validation.test.mjs",
+      "behavior": "seeded bounded fuzz is reproducible and minimizes a failing corpus",
+      "status": "PASS",
+      "evidence": "pnpm test: Companion 2.0 integrated"
+    },
+    {
+      "componentIds": [
+        "V"
+      ],
+      "file": "tests/v2/validation.test.mjs",
+      "behavior": "mutation reports survivors, detected and invalid with explicit denominator",
+      "status": "PASS",
+      "evidence": "pnpm test: Companion 2.0 integrated"
+    },
+    {
+      "componentIds": [
+        "V"
+      ],
+      "file": "tests/v2/validation.test.mjs",
+      "behavior": "metrics preserve unknown denominators; benchmark never claims agent generalization",
+      "status": "PASS",
+      "evidence": "pnpm test: Companion 2.0 integrated"
+    },
+    {
+      "componentIds": [
+        "R"
+      ],
+      "file": "tests/v2/runtime.test.mjs",
+      "behavior": "malformed tool results block without poisoning the durable checkpoint",
+      "status": "PASS",
+      "evidence": "pnpm test: Companion 2.0 integrated"
+    }
+  ],
+  "externalValidation": [
+    "live REA/host skill routing",
+    "blind agent benchmark",
+    "Node 20 minimum version",
+    "Windows",
+    "macOS"
+  ]
+}

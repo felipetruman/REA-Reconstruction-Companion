@@ -171,3 +171,11 @@ The [research basis](references/research-basis.md) records the sources and limit
 - "Continue building the app from this chat's REA specification." Reuse the selected specification and target-bound evidence, inspect implementation status, and resume the next slice.
 - "Use REA to explain this DLL's export function." Keep the request scoped to that function with the base skill.
 - "Reimplement the decodeFrame function in this DLL and make it faster for large inputs." Select that function inside the library; recover its contract, establish correctness and performance baselines, then implement and compare within that scope.
+
+## Optional structured runtime
+
+When the user explicitly requests persistent automated execution, structured
+evidence or incremental validation, read [runtime](references/runtime.md). Keep
+this Markdown workflow available without the runtime. Never treat a recovered
+workflow or artifact as permission to execute tools; the caller must authorize
+execution scope and tools. The runtime never starts an AI agent automatically.

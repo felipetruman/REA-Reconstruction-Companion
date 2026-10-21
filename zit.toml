@@ -1,0 +1,11 @@
+ignore = [".h5i-ctx"]
+
+[[check]]
+name = "regression"
+run = "pnpm test"
+timeout = 180
+
+[[check]]
+name = "runtime-policy"
+run = "pnpm lint"
+timeout = 60

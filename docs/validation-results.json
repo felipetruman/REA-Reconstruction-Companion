@@ -1,0 +1,95 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-10-21T00:26:10.796101+00:00",
+  "sourceBaseline": "269ac04cad16bb38e688b71bc2760b44428e4367",
+  "environment": {
+    "node": "24.19.0",
+    "pnpm": "12.10.1",
+    "platform": "linux",
+    "architecture": "x64"
+  },
+  "results": [
+    {
+      "command": "pnpm test",
+      "scope": "baseline 1.3.34",
+      "counts": {
+        "tests": 575,
+        "pass": 572,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 3,
+        "todo": 0
+      },
+      "exit": 0,
+      "durationMs": 8943.02344,
+      "logSha256": "8afa86573b785e1e113ce14ccd3a8191d0e4b0e2dd69e113d6a05b9a05c2def8",
+      "localLog": "/tmp/companion-baseline.log"
+    },
+    {
+      "command": "pnpm test",
+      "scope": "Companion 2.0 integrated",
+      "counts": {
+        "tests": 617,
+        "pass": 614,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 3,
+        "todo": 0
+      },
+      "exit": 0,
+      "durationMs": 10274.899834,
+      "logSha256": "b2761c1bbc8d6cc69d699c2252bdb9e26d3da333a666c11c5f2ac2cd0383bd6e",
+      "localLog": "/tmp/companion-verified-suite.log"
+    }
+  ],
+  "newSuite": {
+    "tests": 42,
+    "pass": 42,
+    "fail": 0,
+    "skipped": 0
+  },
+  "benchmark": {
+    "publicSuiteScenarios": {
+      "pass": 3,
+      "total": 3
+    },
+    "seededFuzz": {
+      "seed": 42,
+      "iterations": 100,
+      "divergences": 0
+    },
+    "mutation": {
+      "detected": 1,
+      "equivalentSurvivor": 1,
+      "invalid": 1,
+      "validDenominator": 2
+    },
+    "agentEvaluation": {
+      "status": "NOT_RUN",
+      "blind": false,
+      "reason": "No agent/model invoked. Public fixtures do not measure generalization."
+    }
+  },
+  "notRun": [
+    "live REA/host skill routing",
+    "blind agent benchmark",
+    "Node 20 minimum version",
+    "Windows",
+    "macOS"
+  ],
+  "releaseVerification": "See release verification command; generated package is local, unpublished.",
+  "node22": {
+    "version": "22.22.0",
+    "tests": 42,
+    "pass": 42,
+    "fail": 0,
+    "skipped": 0,
+    "localLog": "/tmp/companion-node22-verified.log"
+  },
+  "staticChecks": {
+    "command": "pnpm lint",
+    "status": "PASS",
+    "modules": 9,
+    "kind": "native syntax and execution policy; no TypeScript compiler"
+  }
+}
