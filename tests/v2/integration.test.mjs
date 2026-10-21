@@ -40,8 +40,10 @@ test('external block modification, stale plan, ambiguous case and symlink fail s
   const receipt=applyIntegration(integrationPlan({reaPath:file,companionPath:root,mode:'legacy'}),{execute:true,receiptDir:path.join(root,'receipts')});
   fs.writeFileSync(file,fs.readFileSync(file,'utf8').replace('## REA Reconstruction Companion integration','## User modified block'));
   assert.throws(()=>uninstallIntegration(receipt,{execute:true}),/modified/);
-  fs.writeFileSync(path.join(rea,'SKILL.md'),'ambiguous');assert.throws(()=>discover({roots:[root]}),/ambiguous/);
-  fs.symlinkSync(file,path.join(root,'link'));assert.throws(()=>integrationPlan({reaPath:path.join(root,'link'),mode:'legacy'}),/symlink/);
+  fs.writeFileSync(path.join(rea,'SKILL.md'),fs.readFileSync(file));
+  if(fs.readdirSync(rea).filter(n=>n.toLowerCase()==='skill.md').length>1)assert.throws(()=>discover({roots:[root]}),/ambiguous/);
+  else assert.equal(discover({roots:[root]}).length,1,'One case-insensitive file is a valid alias, not two conflicting skills');
+  fs.symlinkSync(rea,path.join(root,'link'),process.platform==='win32'?'junction':'dir');assert.throws(()=>integrationPlan({reaPath:path.join(root,'link'),mode:'legacy'}),/symlink/);
 });
 test('native scoped installation verifies files, detects drift and preserves customizations until explicit replacement',t=>{
   assert.equal(createRequire(import.meta.url).resolve('rea-reconstruction-companion/install.mjs'),fileURLToPath(new URL('../../install.mjs',import.meta.url)));

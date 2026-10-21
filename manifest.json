@@ -72,7 +72,7 @@
     "tests/v2/e2e.test.mjs": "ae5ed38a093b12783a88da10cafcee72585fab368dffcab0871e04a011ab78b6",
     "tests/v2/evidence.test.mjs": "492b23c8c3bd421ccf6eb5b22030e62faba618bff038e22acecaef56395a9981",
     "tests/v2/hardening.test.mjs": "fa9489993c5edd7041fa0a6404fd3dd1adc9c9992fa95dd756f4d3511a3ee84a",
-    "tests/v2/integration.test.mjs": "8bf1c79aa5dd0f5c5da8ce7a4cab943708f355ff9b36bb48445a525b2d1d561f",
+    "tests/v2/integration.test.mjs": "9f2053801f94b48110836986ff8d0f616fd13b30f976c742b138a1948e4861de",
     "tests/v2/optimization.test.mjs": "53d2f8b23bd90ac6d2eed598776b01351143e4929930d091558b4ad726891922",
     "tests/v2/resources.test.mjs": "257fc81dd7eda6f3cf157d2ffb4a10627d401f35406080f6ebd42b69a7826cac",
     "tests/v2/runtime.test.mjs": "734d042469e1d4c1de11559a137f451e93fef56a7cf332e32804a4e0c4ee68a5",
