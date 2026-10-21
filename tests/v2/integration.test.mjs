@@ -1,3 +1,4 @@
+import { fileURLToPath } from 'node:url';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -6,7 +7,7 @@ import path from 'node:path';
 import { createRequire } from 'node:module';
 import { probeRea, discover, diagnose, integrationPlan, applyIntegration, uninstallIntegration, installCompanion } from '../../src/integration/index.mjs';
 function fixture(t,version='4.1.0') {
-  const root=fs.mkdtempSync(path.join(os.tmpdir(),'REA space '));t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
+  const root=fs.mkdtempSync(path.join(fs.realpathSync(os.tmpdir()),'REA space '));t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
   const rea=path.join(root,'Custom REA');fs.mkdirSync(rea);const file=path.join(rea,'skill.md');
   fs.writeFileSync(file,`---\nname: reverse-engineer-anything\nversion: ${version}\n---\n# Custom\nKeep my rules.\n`);
   return {root,rea,file};
@@ -43,7 +44,7 @@ test('external block modification, stale plan, ambiguous case and symlink fail s
   fs.symlinkSync(file,path.join(root,'link'));assert.throws(()=>integrationPlan({reaPath:path.join(root,'link'),mode:'legacy'}),/symlink/);
 });
 test('native scoped installation verifies files, detects drift and preserves customizations until explicit replacement',t=>{
-  assert.equal(createRequire(import.meta.url).resolve('rea-reconstruction-companion/install.mjs'),new URL('../../install.mjs',import.meta.url).pathname);
+  assert.equal(createRequire(import.meta.url).resolve('rea-reconstruction-companion/install.mjs'),fileURLToPath(new URL('../../install.mjs',import.meta.url)));
   const {root,file}=fixture(t),skillsDir=path.join(root,'isolated skills'),before=fs.readFileSync(file,'utf8');
   const preview=installCompanion({skillsDir,host:'codex'});assert.equal(preview.status,'ABSENT');assert.equal(fs.existsSync(skillsDir),false);
   const installed=installCompanion({skillsDir,host:'codex',execute:true});assert.equal(installed.status,'VERIFIED');assert.equal(fs.readFileSync(file,'utf8'),before);

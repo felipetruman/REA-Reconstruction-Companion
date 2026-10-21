@@ -28,6 +28,13 @@ export function noSymlinks(value) {
     const parent=path.dirname(cursor);if(parent===cursor)break;cursor=parent;
   }
 }
+// Windows does not expose POSIX directory fsync through Node. File data is
+// still fsynced before atomic rename; directory durability is best-effort there.
+export function syncDirectory(directory,{platform=process.platform,io=fs}={}) {
+  if(platform==='win32')return {synced:false,reason:'Directory fsync unavailable through Node on Windows'};
+  const descriptor=io.openSync(directory,'r');
+  try{io.fsyncSync(descriptor);return {synced:true};}finally{io.closeSync(descriptor);}
+}
 export function atomicWrite(file,data,{expectedHash,maxBytes=16*1024*1024}={}) {
   noSymlinks(file);if(Buffer.byteLength(data)>maxBytes)throw new Error('Store size limit exceeded');
   fs.mkdirSync(path.dirname(file),{recursive:true,mode:0o700});
@@ -41,7 +48,7 @@ export function atomicWrite(file,data,{expectedHash,maxBytes=16*1024*1024}={}) {
     const out=fs.openSync(temp,'wx',0o600);
     try {fs.writeFileSync(out,data);fs.fsyncSync(out);}finally{fs.closeSync(out);}
     fs.renameSync(temp,file);
-    const dir=fs.openSync(path.dirname(file),'r');try{fs.fsyncSync(dir);}finally{fs.closeSync(dir);}
+    syncDirectory(path.dirname(file));
   }finally {fs.closeSync(fd);fs.unlinkSync(lock);if(fs.existsSync(temp))fs.unlinkSync(temp);}
 }
 

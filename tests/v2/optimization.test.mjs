@@ -7,7 +7,7 @@ import { EvidenceCache, selectTests, selectReferences, summarize, Telemetry } fr
 import { digest } from '../../src/evidence/index.mjs';
 const identity={target:'a',version:'1',hash:digest('a'),environment:{os:'linux'},scenario:'parse',tool:{name:'reader',version:'1',parameters:{strict:true}},schemaVersion:'2.0.0'};
 test('cache persists exact identities, counts hits/misses, invalidates dependents and preserves history',t=>{
-  const root=fs.mkdtempSync(path.join(os.tmpdir(),'rea-cache-'));t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
+  const root=fs.mkdtempSync(path.join(fs.realpathSync(os.tmpdir()),'rea-cache-'));t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
   const cache=new EvidenceCache(root);cache.put(identity,{evidenceIds:['e']});assert.equal(cache.get(identity).current,true);
   assert.equal(cache.get({...identity,version:'2'}),null);
   cache.invalidate({target:'a',version:'2',hash:digest('b')});assert.equal(cache.get(identity),null);

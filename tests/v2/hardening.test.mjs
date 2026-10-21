@@ -1,3 +1,4 @@
+import { fileURLToPath } from 'node:url';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -23,12 +24,12 @@ test('typed references and non-independent oracles are inconsistent',()=>{
   assert.throws(()=>validateRecord({type:'__proto__',schemaVersion:'2.0.0'}));
 });
 test('reference loading is selective, bounded and discloses omitted data',()=>{
-  const root=new URL('../../skills/rea-reconstruction-companion',import.meta.url).pathname;
+  const root=fileURLToPath(new URL('../../skills/rea-reconstruction-companion',import.meta.url));
   const result=loadReferences(root,'function',{maxBytes:4096});assert.ok(result.authority.includes('untrusted'));assert.ok(result.loadedBytes<=4096);assert.ok(result.omitted.length);
   assert.ok(result.references.every(r=>r.hash.length===64));
 });
 test('runtime plan identity prevents config substitution during resume',t=>{
-  const root=fs.mkdtempSync(path.join(os.tmpdir(),'rea-plan-'));t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
+  const root=fs.mkdtempSync(path.join(fs.realpathSync(os.tmpdir()),'rea-plan-'));t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
   const config={schemaVersion:'2.0.0',target:{id:'t',version:'1',hash:digest('t')},scope:['p'],requirements:[{id:'r',acceptance:['a']}],tasks:[],candidate:{identity:'c'},oracle:{id:'o',identity:'ref',cases:[]}};
   const first=createWorkflow(config,{root});first.runtime.save();
   assert.throws(()=>createWorkflow({...config,scope:['different']},{root}),/mismatch|changed/);

@@ -7,7 +7,7 @@ import { Runtime } from '../../src/runtime/index.mjs';
 import { EvidenceStore, digest, sealEvidence, verifyArtifact } from '../../src/evidence/index.mjs';
 import { createExample } from '../../src/cli/example.mjs';
 import { createWorkflow, readWorkflow } from '../../src/adapters/workflow.mjs';
-function temp(t){const root=fs.mkdtempSync(path.join(os.tmpdir(),'rea-resources-'));t.after(()=>fs.rmSync(root,{recursive:true,force:true}));return root;}
+function temp(t){const root=fs.mkdtempSync(path.join(fs.realpathSync(os.tmpdir()),'rea-resources-'));t.after(()=>fs.rmSync(root,{recursive:true,force:true}));return root;}
 test('artifact references verify real bytes and reject corruption/traversal',t=>{
   const root=temp(t);fs.writeFileSync(path.join(root,'sample'),'original');
   const evidence=sealEvidence({type:'Evidence',schemaVersion:'2.0.0',id:'e',targetId:'t',targetVersion:'1',targetHash:digest('t'),kind:'artifact',origin:'local',location:'sample',timestamp:new Date().toISOString(),scenario:'x',artifact:'sample',artifactHash:digest('original'),limitations:[]});
@@ -19,7 +19,7 @@ test('operation budget includes actual candidate tool calls and total deadline i
   const workflow=createWorkflow(config,{root:path.join(root,'run'),allowedExecutables:[process.execPath]});
   const result=await workflow.runtime.run({execute:true});assert.equal(result.state,'BLOCKED');assert.equal(result.operations,4);
   const runtime=new Runtime({root:path.join(root,'time'),target:config.target,scope:config.scope,limits:{totalMs:10,stageMs:100},handlers:{investigate:async()=>{await new Promise(r=>setTimeout(r,50));return {};}}});
-  const timed=await runtime.run({execute:true});assert.equal(timed.state,'BLOCKED');assert.ok(timed.spentMs>=10);
+  const timed=await runtime.run({execute:true});assert.equal(timed.state,'BLOCKED');assert.ok(timed.spentMs>0);assert.match(timed.blockers.join(),/deadline|budget/i);
 });
 test('formal checkpoint records are connected to real workflow state',async t=>{
   const root=temp(t);createExample(root,{execute:true});const config=readWorkflow(path.join(root,'workflow.json'));

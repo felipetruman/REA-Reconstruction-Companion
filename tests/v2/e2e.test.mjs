@@ -1,3 +1,4 @@
+import { fileURLToPath } from 'node:url';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -6,9 +7,9 @@ import path from 'node:path';
 import { spawn, spawnSync } from 'node:child_process';
 import { localCommand } from '../../src/adapters/local.mjs';
 import { digest } from '../../src/evidence/index.mjs';
-const cli=new URL('../../src/cli/index.mjs',import.meta.url).pathname;
+const cli=fileURLToPath(new URL('../../src/cli/index.mjs',import.meta.url));
 function fixture(t) {
-  const root=fs.mkdtempSync(path.join(os.tmpdir(),'rea e2e '));t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
+  const root=fs.mkdtempSync(path.join(fs.realpathSync(os.tmpdir()),'rea e2e '));t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
   // Independent preserved reference behavior; no candidate execution generates it.
   const cases=[{id:'empty',requirementId:'length',input:'',expected:{output:0}},{id:'ascii',requirementId:'length',input:'abc',expected:{output:3}},{id:'unicode',requirementId:'length',input:'😀',expected:{output:2}}];
   const candidate="let input='';for await(const b of process.stdin)input+=b;console.log(JSON.stringify({output:JSON.parse(input).length}));";
@@ -38,7 +39,7 @@ test('local adapter denies ungranted executables, bounds time/output and never i
   await assert.rejects(()=>localCommand({executable:process.execPath,args:['-e','setInterval(()=>{},100)']},{cwd:root,allowedExecutables:[process.execPath],timeoutMs:20}),/deadline/);
   await assert.rejects(()=>localCommand({executable:process.execPath,args:['-e',"console.log('a'.repeat(10000))"]},{cwd:root,allowedExecutables:[process.execPath],maxBytes:100}),/output/);
 });
-test('SIGTERM during real subprocess execution persists cancellation and resumes safely',async t=>{
+test('SIGTERM during real subprocess execution persists cancellation and resumes safely',{skip:process.platform==='win32'?'Windows kill(SIGTERM) forcibly terminates; cooperative AbortSignal coverage is in runtime.test.mjs':false},async t=>{
   const {root,file,config}=fixture(t);const command=config.tasks[0].command;
   command.args[1]=`require('node:fs').writeFileSync('started','yes');setTimeout(()=>{${command.args[1]}},600);`;
   fs.writeFileSync(file,JSON.stringify(config));

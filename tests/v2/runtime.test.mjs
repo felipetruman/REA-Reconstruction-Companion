@@ -6,7 +6,7 @@ import path from 'node:path';
 import { Runtime, planTasks } from '../../src/runtime/index.mjs';
 import { differential, recordingOracle } from '../../src/validation/index.mjs';
 const target={id:'local',version:'1',hash:'a'.repeat(64)};
-function temp(t){const root=fs.mkdtempSync(path.join(os.tmpdir(),'rea-runtime-'));t.after(()=>fs.rmSync(root,{recursive:true,force:true}));return root;}
+function temp(t){const root=fs.mkdtempSync(path.join(fs.realpathSync(os.tmpdir()),'rea-runtime-'));t.after(()=>fs.rmSync(root,{recursive:true,force:true}));return root;}
 function setup(t,{bad=false,repair=true,...config}={}) {
   let wrong=bad;
   const cases=[{id:'c',requirementId:'r',input:'ab',expected:{output:2}}];

@@ -111,3 +111,11 @@ Windows process-tree cleanup and actual Windows/macOS execution are unvalidated.
 Telemetry is local. Host tokens require explicit source attribution; byte-based
 token figures are labeled estimates. The application neither enables billing nor
 promises the surrounding AI host is free. No performance improvement is claimed.
+
+Cross-platform persistence: file descriptors are fsynced before atomic rename.
+POSIX parent-directory fsync failures propagate; Windows directory fsync is
+unsupported by Node and skipped explicitly (metadata power-loss durability is
+best-effort). Symlink rejection remains strict. Tests use the canonical native
+temporary directory (macOS /var is an OS alias) and fileURLToPath for Windows
+drive letters. POSIX SIGTERM graceful cancellation is not asserted on Windows,
+where kill(SIGTERM) is forced termination; AbortSignal tests remain portable.
